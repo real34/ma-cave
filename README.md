@@ -3,6 +3,10 @@ Ma cave
 
 Application minimaliste de gestion de cave à vin.
 
+## Fonctionnalités actuelles
+
+Aucune
+
 ## Vision
 
 Ce projet est un "[jouet cassable](http://chimera.labs.oreilly.com/books/1234000001813/ch05.html#breakable_toys)" qui a les buts suivants :
