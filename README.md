@@ -3,6 +3,8 @@ Ma cave
 
 Application minimaliste de gestion de cave à vin.
 
+[![Build Status](https://travis-ci.org/real34/ma-cave.png?branch=master)](https://travis-ci.org/real34/ma-cave)
+
 ## Fonctionnalités actuelles
 
 Aucune
