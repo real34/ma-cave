@@ -1,0 +1,18 @@
+# No .editorconfig files above the root directory
+root = true
+
+[*]
+indent_style = space
+end_of_line = lf
+charset = utf-8
+trim_trailing_whitespace = true
+insert_final_newline = true
+
+[*.{html,js,scss,json}]
+indent_size = 4
+
+[*.md]
+indent_size = 4
+
+[.travis.yml]
+indent_size = 2
