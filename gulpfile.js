@@ -13,7 +13,7 @@ var paths = {
 gulp.task('deploy', ['styles'], function () {
     gulp.src('./public/**/*')
         .pipe(deploy(pkg.repository.url));
-});;
+});
 
 gulp.task('styles', function () {
     return gulp.src(paths.styles)
