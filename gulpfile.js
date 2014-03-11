@@ -1,9 +1,14 @@
 var gulp = require('gulp'),
+    concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     neat = require('node-neat'),
     livereload = require('gulp-livereload'),
     deploy = require('gulp-gh-pages'),
     pkg = require('./package.json');
+
+var paths = {
+    styles: ['./node_modules/normalize.css/normalize.css', './styles/app.scss']
+};
 
 gulp.task('deploy', ['styles'], function () {
     gulp.src('./public/**/*')
@@ -11,16 +16,17 @@ gulp.task('deploy', ['styles'], function () {
 });;
 
 gulp.task('styles', function () {
-    return gulp.src('./styles/app.scss')
+    return gulp.src(paths.styles)
         .pipe(sass({
             includePaths: ['./styles'].concat(neat.includePaths)
         }))
+        .pipe(concat('app.css'))
         .pipe(gulp.dest('./public/design'))
         .pipe(livereload());
 });
 
 gulp.task('watch', function () {
-    gulp.watch('styles/*.scss', ['styles']);
+    gulp.watch(paths.styles, ['styles']);
 });
 
 gulp.task('default', ['styles', 'watch']);
