@@ -31,11 +31,20 @@
         </div>
 
         <div ng-show='enModeAjout'>
-        <form ng-submit='ajouteBouteille()'>
-        <input type='text' ng-model='nom' placeholder='Entrez le nom de la bouteille'>
-        </form>
+            <form ng-submit='ajouteBouteille()'>
+                <input type='text' ng-model='nom' placeholder='Entrez le nom de la bouteille'>
+                <button type="submit">Mettre en cave</button>
+            </form>
         </div>
 
+        <div class="bouteilles" ng-hide="estVide()">
+            <h2>Vos bouteilles</h2>
+            <ul>
+                <li ng-repeat="bouteille in listeBouteilles()">
+                    {{ bouteille.nom }}
+                </li>
+            </ul>
+        </div>
     </section>
 
     <footer>

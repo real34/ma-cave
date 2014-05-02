@@ -15,6 +15,10 @@ angular.module('MaCave', [])
 		initialiseFormAjout();
 	}
 
+	$scope.listeBouteilles = function listeBouteilles() {
+		return cave.bouteilles();
+	}
+
 	function initialiseFormAjout(){
 		$scope.nom = '';
 	}
