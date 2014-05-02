@@ -4,7 +4,8 @@
   "description": "Application minimaliste de gestion de cave à vin.",
   "main": "index.js",
   "scripts": {
-    "test": "mocha --reporter list"
+    "test": "mocha --no-colors --reporter list",
+    "build": "browserify app/main.js -o public/js/app.js"
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
   },
   "dependencies": {
     "csv": "^0.3.7",
-    "normalize.css": "0.0.1"
+    "normalize.css": "0.0.1",
+    "angular": "~1.2.10"
   }
 }
