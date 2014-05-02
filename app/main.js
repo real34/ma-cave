@@ -8,7 +8,14 @@ angular.module('MaCave', [])
 	$scope.estVide = function estVide() {
 		return cave.estVide();
 	}
+
+	initialiseFormAjout();
 	$scope.ajouteBouteille = function ajouteBouteille() {
-		cave.ajouteBouteille(new Bouteille());
+		cave.ajouteBouteille(new Bouteille($scope.nom));
+		initialiseFormAjout();
+	}
+
+	function initialiseFormAjout(){
+		$scope.nom = '';
 	}
 }]);

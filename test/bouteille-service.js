@@ -27,12 +27,17 @@ describe('Cave à vin', function () {
 
 });
 
-describe('Service de Bouteilles', function () {
+describe('Bouteille', function () {
 
     // Cave.ajouteBouteille(bouteille);
     // bouteille.metDans(cave);
 
-    describe('mettre une bouteille en cave', function () {
+    describe('création', function () {
+        it('doit avoir un nom', function(){
+            var bouteille = new Bouteille('Chateau DevOpenSud');
+            bouteille.should.have.property('nom');
+            bouteille.nom.should.equal('Chateau DevOpenSud');
+        })
         // it('', function (done) {
         //     var contenu = opencellar('test/fixtures/opencellar.csv');
         //     contenu.on('end', function (nombredeLignes) {
@@ -43,6 +48,7 @@ describe('Service de Bouteilles', function () {
     });
 
 });
+
 
 /**
 
