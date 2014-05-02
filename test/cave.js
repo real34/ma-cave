@@ -1,7 +1,7 @@
 require('chai').should();
 
 var Cave = require('../app/cave');
-var Bouteille = require('../app/bouteille');
+var Bouteille = require('../app/bouteille').Bouteille;
 
 describe('Cave à vin', function () {
     var cave;
@@ -40,3 +40,5 @@ describe('Cave à vin', function () {
     });
 
 });
+
+//Quand on ajoute une même bouteille, sa quantité est mise à jour

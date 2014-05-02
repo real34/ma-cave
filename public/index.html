@@ -5,7 +5,7 @@
     <title>Ma cave à vin - Gestion minimaliste de cave à vin</title>
 
     <link rel="stylesheet" media="screen" href="design/app.css" />
-    <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet">
+    <!-- <link href="//netdna.bootstrapcdn.com/font-awesome/3.2.1/css/font-awesome.min.css" rel="stylesheet"> -->
     <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
@@ -32,7 +32,93 @@
 
         <div ng-show='enModeAjout'>
             <form ng-submit='ajouteBouteille()'>
-                <input type='text' ng-model='nom' placeholder='Entrez le nom de la bouteille'>
+                <div>
+                    <label for="nom">Nom / Cuvée</label>
+                    <input type='text' ng-model='nom' placeholder='Entrez le nom / la cuvée de la bouteille'>
+                </div>
+
+                <div>
+                    <label for="millesime">Millésime</label>
+                    <input type='number' ng-model='millesime' placeholder='2012'>
+                </div>
+
+                <div>
+                    <label for="couleur">Couleur</label>
+                    <select ng-model="couleur">
+                        <option value="Rouge">Rouge
+                        <option value="Rosé">Rosé
+                        <option value="Blanc">Blanc
+                        <option value="Champagne">Champagne
+                    </select>
+                </div>
+
+                <div>
+                    <label for="contenance">Contenance</label>
+                    <input type='number' ng-model='contenance.quantite' placeholder='75'>
+                    <select ng-model='contenance.unite'>
+                        <option value="cl">cl</option>
+                        <option value="l">L</option>
+                    </select>
+                </div>
+
+                <div>
+                    <label for="producteur">Producteur</label>
+                    <input type='text' ng-model='producteur' placeholder='Château Saincrit'>
+                </div>
+
+                <div>
+                    <label for="denomination">Dénomination</label>
+                    <input type='text' ng-model='denomination' placeholder='bordeaux supérieur aoc'>
+                </div>
+
+                <div>
+                    <label for="region">Région</label>
+                    <input type='region' ng-model='region' placeholder='bordeaux'>
+                </div>
+
+                <div>
+                    <label for="taux_alcool">Taux d'alcool</label>
+                    <input type='text' ng-model='taux_alcool' placeholder='12,5'>
+                </div>
+
+                <div>
+                    <label for="cepages">Cépages</label>
+
+                    <input type="checkbox" ng-model="cepages.cabernet" id="cabernet" value="cabernet">
+                    <label for="cabernet">Cabernet</label>
+
+                    <input type="checkbox" ng-model="cepages.sauvignon" id="sauvignon" value="sauvignon">
+                    <label for="sauvignon">Sauvignon</label>
+
+                    <input type="checkbox" ng-model="cepages.syrah" id="syrah" value="syrah">
+                    <label for="syrah">Syrah</label>
+
+                    <input type="checkbox" ng-model="cepages.merlot" id="merlot" value="merlot">
+                    <label for="merlot">Merlot</label>
+
+                    <input type="checkbox" ng-model="cepages.tanat" id="tanat" value="tanat">
+                    <label for="tanat">Tanat</label>
+
+                    <input type="checkbox" ng-model="cepages.muscat" id="muscat" value="muscat">
+                    <label for="muscat">Muscat</label>
+
+                    <input type="checkbox" ng-model="cepages.chacelas" id="chacelas" value="chacelas">
+                    <label for="chacelas">Chacelas</label>
+                </div>
+
+                <div>
+                    <label for="medaille">Médaille</label>
+
+                    <label for="classement">Classement</label>
+                    <input type="number" ng-model="medaille.classement">
+
+                    <label for="nom">Nom</label>
+                    <input type="text" ng-model="medaille.nom">
+
+                    <label for="annee">Annee</label>
+                    <input type="number" ng-model="medaille.annee">
+                </div>
+
                 <button type="submit">Mettre en cave</button>
             </form>
         </div>
@@ -41,7 +127,7 @@
             <h2>Vos bouteilles</h2>
             <ul>
                 <li ng-repeat="bouteille in listeBouteilles()">
-                    {{ bouteille.nom }}
+                    {{ bouteille.nom }} {{bouteille.millesime.annee}}
                 </li>
             </ul>
         </div>
