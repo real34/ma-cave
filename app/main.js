@@ -4,12 +4,21 @@ var Bouteille = require('./bouteille').Bouteille;
 var moduleBouteille = require('./bouteille');
 
 angular.module('MaCave', [])
-.controller('CaveController', ['$scope', function($scope) {
+.service('CaveService', [function() {
 	var cave = new Cave();
+	return cave;
+}])
+.controller('CaveController', ['$scope', 'CaveService', function($scope, CaveService) {
 	$scope.estVide = function estVide() {
-		return cave.estVide();
+		return CaveService.estVide();
 	}
 
+	$scope.listeBouteilles = function listeBouteilles() {
+		return CaveService.bouteilles();
+	}
+}])
+
+.controller('AjoutBouteilleController', ['$scope', 'CaveService', function($scope, CaveService) {
 	initialiseFormAjout();
 	$scope.ajouteBouteille = function ajouteBouteille() {
 		var bouteille = new Bouteille($scope.nom);
@@ -32,12 +41,8 @@ angular.module('MaCave', [])
 			$scope.medaille.annee
 		));
 
-		cave.ajouteBouteille(bouteille);
+		CaveService.ajouteBouteille(bouteille);
 		initialiseFormAjout();
-	}
-
-	$scope.listeBouteilles = function listeBouteilles() {
-		return cave.bouteilles();
 	}
 
 	function initialiseFormAjout(){

@@ -31,7 +31,7 @@
         </div>
 
         <div ng-show='enModeAjout'>
-            <form ng-submit='ajouteBouteille()'>
+            <form ng-controller="AjoutBouteilleController" ng-submit='ajouteBouteille()'>
                 <div>
                     <label for="nom">Nom / Cuvée</label>
                     <input type='text' ng-model='nom' placeholder='Entrez le nom / la cuvée de la bouteille'>
@@ -127,7 +127,7 @@
             <h2>Vos bouteilles</h2>
             <ul>
                 <li ng-repeat="bouteille in listeBouteilles()">
-                    {{ bouteille.nom }} {{bouteille.millesime.annee}}
+                        {{ bouteille.nom }} {{bouteille.millesime.annee}}
                 </li>
             </ul>
         </div>
