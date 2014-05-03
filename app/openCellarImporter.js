@@ -8,18 +8,18 @@ var OpenCellarImporter = function (cave) {
 }
 
 OpenCellarImporter.prototype.importCsv = function(csvFilePathOrString, callback) {
-	csv()
-		.from(csvFilePathOrString, csvFormatOptions)
-		.on('record', this.importRow.bind(this))
-		.on('end', callback);
+	this.csvParser(callback).from(csvFilePathOrString, csvFormatOptions);
 };
 
 OpenCellarImporter.prototype.importCsvString = function(content, callback) {
-	csv()
-		.from.string(content, csvFormatOptions)
+	this.csvParser(callback).from.string(content, csvFormatOptions);
+};
+
+OpenCellarImporter.prototype.csvParser = function(callback) {
+	return csv()
 		.on('record', this.importRow.bind(this))
 		.on('end', callback);
-};
+}
 
 OpenCellarImporter.prototype.importRow = function(row) {
 	this.cave.ajouteBouteille(new Bouteille(row.Nom));
