@@ -2,6 +2,7 @@ require('angular');
 var Cave = require('./cave');
 var Bouteille = require('./bouteille').Bouteille;
 var moduleBouteille = require('./bouteille');
+var OpenCellarImporter = require('./openCellarImporter');
 
 angular.module('MaCave', [])
 .service('CaveService', [function() {
@@ -16,6 +17,38 @@ angular.module('MaCave', [])
 	$scope.listeBouteilles = function listeBouteilles() {
 		return CaveService.bouteilles();
 	}
+
+	$scope.importCsvFile = function() {
+		var reader = new FileReader();
+		reader.onload = function() {
+			var importateur = new OpenCellarImporter(CaveService);
+			importateur.importCsvString(this.result, function() {
+				$scope.$apply();
+			});
+		};
+		reader.readAsText($scope.opencellarCsvFile);
+	}
+}])
+.directive('uploadFile', ['$parse',  function ($parse) {
+	return {
+		restrict: "EA",
+		template: "<input type='file' />",
+		replace: true,
+		link: function (scope, element, attrs) {
+			var modelGet = $parse(attrs.uploadFile);
+			var modelSet = modelGet.assign;
+			var onChange = $parse(attrs.onChange);
+
+			var updateModel = function () {
+				scope.$apply(function () {
+					modelSet(scope, element[0].files[0]);
+					onChange(scope);
+				});
+			};
+
+			element.bind('change', updateModel);
+		}
+	};
 }])
 
 .controller('AjoutBouteilleController', ['$scope', 'CaveService', function($scope, CaveService) {
