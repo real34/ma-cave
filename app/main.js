@@ -1,5 +1,6 @@
 require('angular');
-var Cave = require('./cave');
+// var Cave = require('./cave/in_memory');
+var Cave = require('./cave/local_storage');
 var Bouteille = require('./bouteille').Bouteille;
 var moduleBouteille = require('./bouteille');
 var OpenCellarImporter = require('./openCellarImporter');

@@ -1,6 +1,6 @@
 require('chai').should();
 
-var Cave = require('../app/cave');
+var Cave = require('../app/cave/in_memory');
 var OpenCellarImporter = require('../app/openCellarImporter');
 var fs = require('fs');
 

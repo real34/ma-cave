@@ -1,6 +1,7 @@
 var Cave = function() {
 	this._bouteilles = [];
 }
+
 Cave.prototype.estVide = function() {
 	return this._bouteilles.length === 0;
 };
