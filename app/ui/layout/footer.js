@@ -8,12 +8,12 @@ riot.tag('layout-footer',
         <div class="a-propos">
             <h4>Qui sommes-nous ?</h4>
             <p>
-                <i class="icon icon-twitter"></i>
+                <i class="fa fa-twitter"></i>
                 Le projet principalement maintenu par
                 <a href="http://twitter.com/pierremartin">Pierre Martin</a>.
             </p>
             <p>
-                <i class="icon icon-github"></i>
+                <i class="fa fa-github"></i>
                 Le code source est disponible sur <a href="http://github.com/real34/ma-cave">Github</a> !
             </p>
         </div>
@@ -24,7 +24,7 @@ riot.tag('layout-footer',
                 <label for="_replyto">Email :</label> <input type="email" name="_replyto">
                 <label for="suggestion">Message : </label>
                 <textarea name="suggestion" required="required" id="" cols="30" rows="10"></textarea>
-                <button type="submit"><i class="icon icon-rocket"></i> Envoyer</button>
+                <button type="submit"><i class="fa fa-rocket"></i> Envoyer</button>
             </form>
         </div>
     </footer>

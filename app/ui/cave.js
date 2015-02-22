@@ -11,8 +11,8 @@ riot.tag('cave',
 		<div class="erreur" if="{ estVide }">
 			<p>Vous n'avez pas encore ajouté de bouteilles à votre cave.</p>
 			<p>
-				<a class="action" onclick="{ afficherFormulaires }"><i class="icon icon-plus"></i> Mettez des bouteilles en cave</a>
-				ou <a class="action" onclick="{ afficherFormulaires }"><i class="icon icon-file"></i> Importez une cave depuis OpenCellar</a>
+				<a class="action" onclick="{ afficherFormulaires }"><i class="fa fa-plus"></i> Mettez des bouteilles en cave</a>
+				ou <a class="action" onclick="{ afficherFormulaires }"><i class="fa fa-file"></i> Importez une cave depuis OpenCellar</a>
 				afin de pouvoir commencer à utiliser le site
 			</p>
 		</div>
