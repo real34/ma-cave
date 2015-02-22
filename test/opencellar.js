@@ -1,11 +1,11 @@
 require('chai').should();
 
-var Cave = require('../app/cave/in_memory');
-var OpenCellarImporter = require('../app/openCellarImporter');
-var fs = require('fs');
+import {Cave} from '../app/cave/in_memory';
+import OpenCellarImporter from '../app/openCellarImporter';
+import fs from 'fs';
 
 describe('Import Opencellar', function () {
-    describe('Import de bouteilles', function () {
+    xdescribe('Import de bouteilles', function () {
         var maCave;
         var importer;
 

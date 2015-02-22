@@ -1,12 +1,13 @@
 require('chai').should();
 
+import { Bouteille } from '../../app/bouteille';
+
 module.exports = function(CaveImplementation) {
-    describe('Cave à vin', function () {
-        var Bouteille = require('../../app/bouteille').Bouteille;
+    xdescribe('Cave à vin', function () {
         var cave;
 
         beforeEach (function() {
-                cave = new CaveImplementation();
+            cave = new CaveImplementation();
         });
 
         describe('création', function() {
