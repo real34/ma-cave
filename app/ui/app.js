@@ -7,12 +7,12 @@ import cave from './cave';
 riot.tag('ma-cave-app',
 
 	`
-    <layout-header>
+    <layout-header></layout-header>
 
     <presentation></presentation>
     <cave></cave>
 
-    <layout-footer>
+    <layout-footer></layout-footer>
 	`
 
 );
