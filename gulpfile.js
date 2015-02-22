@@ -2,12 +2,14 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     sass = require('gulp-sass'),
     neat = require('node-neat'),
-    livereload = require('gulp-livereload'),
     deploy = require('gulp-gh-pages'),
     pkg = require('./package.json');
 
 var paths = {
-    styles: ['./node_modules/normalize.css/normalize.css', './styles/app.scss']
+    styles: [
+        './node_modules/normalize.css/normalize.css',
+        './styles/app.scss'
+    ]
 };
 
 gulp.task('deploy', ['styles'], function () {
@@ -21,8 +23,7 @@ gulp.task('styles', function () {
             includePaths: ['./styles'].concat(neat.includePaths)
         }))
         .pipe(concat('app.css'))
-        .pipe(gulp.dest('./public/design'))
-        .pipe(livereload());
+        .pipe(gulp.dest('./public/design'));
 });
 
 gulp.task('watch', function () {
