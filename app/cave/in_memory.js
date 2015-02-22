@@ -1,15 +1,18 @@
-var Cave = function() {
-	this._bouteilles = [];
+import riot from 'riot';
+
+export class Cave {
+	constructor() {
+		riot.observable(this);
+		this._bouteilles = [];
+	}
+	estVide() {
+		return this._bouteilles.length === 0;
+	}
+	ajouteBouteille(bouteille) {
+		this._bouteilles.push(bouteille);
+		this.trigger('update');
+	}
+	bouteilles() {
+		return this._bouteilles;
+	}
 }
-
-Cave.prototype.estVide = function() {
-	return this._bouteilles.length === 0;
-};
-Cave.prototype.ajouteBouteille = function(bouteille) {
-	this._bouteilles.push(bouteille);
-};
-Cave.prototype.bouteilles = function() {
-	return this._bouteilles;
-};
-
-module.exports = Cave;
