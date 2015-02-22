@@ -1,5 +1,6 @@
 var csv = require('csv');
 var Bouteille = require('./bouteille').Bouteille;
+var Couleur = require('./bouteille').Couleur;
 
 var csvFormatOptions = { delimiter: ';', columns: true };
 
@@ -16,13 +17,16 @@ OpenCellarImporter.prototype.importCsvString = function(content, callback) {
 };
 
 OpenCellarImporter.prototype.csvParser = function(callback) {
+	callback = callback || function() {};
 	return csv()
 		.on('record', this.importRow.bind(this))
 		.on('end', callback);
 }
 
 OpenCellarImporter.prototype.importRow = function(row) {
-	this.cave.ajouteBouteille(new Bouteille(row.Nom));
+	var bouteille = new Bouteille(row.Nom);
+	bouteille.setCouleur(new Couleur(row.Couleur));
+	this.cave.ajouteBouteille(bouteille);
 }
 
 module.exports = OpenCellarImporter;

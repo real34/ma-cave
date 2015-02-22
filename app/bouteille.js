@@ -31,14 +31,28 @@ Bouteille.prototype.ajouteCepage = function(cepage) {
 Bouteille.prototype.ajouteMedaille = function(medaille) {
 	this.medailles.push(medaille);
 };
-
+Bouteille.fromJSON = function(data) {
+	let bouteille = new Bouteille(data.nom);
+	// TODO Set correct data
+	bouteille.setMillesime(Millesime.fromJSON(data.millesime));
+	bouteille.setCouleur(Couleur.fromJSON(data.couleur));
+	return bouteille;
+};
 
 var Millesime = function Millesime(annee){
 	this.annee = annee;
 };
+Millesime.fromJSON = function(data) {
+	data = data || { annee: ''};
+	return new Millesime(data.annee);
+};
 
 var Couleur = function Couleur(nom) {
 	this.nom = nom;
+};
+Couleur.fromJSON = function(data) {
+	data = data || { nom: ''};
+	return new Couleur(data.nom);
 };
 
 var Contenance = function Contenance(quantité, unité) {
