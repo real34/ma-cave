@@ -1,5 +1,6 @@
-import riot from 'riot';
+import React from 'react';
 
-import './ui/app';
+import MaCaveApp from './ui/app.jsx';
 
-riot.mount('ma-cave-app');
+React.render(<MaCaveApp />, document.getElementById('ma-cave-app'));
+
