@@ -38,14 +38,12 @@
     "mocha": "^1.17.1",
     "node-neat": "^1.1.0",
     "react": "^0.13.0",
-    "riot": "^2.0.1",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
     "csv": "^0.3.7",
     "font-awesome": "^4.3.0",
-    "normalize.css": "0.0.1",
-    "riot": "^2.0.10"
+    "normalize.css": "0.0.1"
   }
 }

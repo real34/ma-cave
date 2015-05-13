@@ -1,8 +1,5 @@
-import riot from 'riot';
-
 export class Cave {
 	constructor() {
-		riot.observable(this);
 		this._bouteilles = [];
 	}
 	estVide() {
@@ -10,7 +7,6 @@ export class Cave {
 	}
 	ajouteBouteille(bouteille) {
 		this._bouteilles.push(bouteille);
-		this.trigger('update');
 	}
 	bouteilles() {
 		return this._bouteilles;
