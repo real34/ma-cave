@@ -1,8 +1,8 @@
 import React from 'react';
 
 import {Cave} from '../cave/local_storage';
-// import formulaireImport from './formulaire-import';
-// import formulaireSaisie from './formulaire-saisie';
+import FormulaireImport from './formulaire-import.jsx';
+import FormulaireSaisie from './formulaire-saisie.jsx';
 
 class ContenuCave extends React.Component {
 	constructor(props) {
@@ -14,23 +14,13 @@ class ContenuCave extends React.Component {
 	}
 
 	handleAfficherFormulaires() {
-		console.debug('ajout');
 		this.setState({ enModeAjout: true });
 	}
 
 	handleCacherFormulaires() {
-		console.debug('cache');
 		this.setState({ enModeAjout: false });
 	}
-	/*
 
-		this.cave.on('update', () => this.update());
-
-		this.on('update', () => {
-			this.bouteilles = this.cave.bouteilles();
-			this.estVide = this.cave.estVide();
-		});
-	*/
 	render() {
 		var callToAction = this.handleAfficherFormulaires.bind(this);
 		var formulaires = '';
@@ -43,23 +33,28 @@ class ContenuCave extends React.Component {
 				{ this.state.cave.estVide() ? <ErreurCaveVide onCallToAction={callToAction} /> : '' }
 				{ formulaires }
 
-				{	/*
-				<div class="bouteilles" if="{ !estVide }">
+				<div class="bouteilles" if="{ !this.state.cave.estVide() }">
 					<h2>Vos bouteilles</h2>
 					<p>
-						<button onclick="{ afficherFormulaires }">Mettre une bouteille en cave</button>
-						<button onclick="{ afficherFormulaires }">Importer depuis OpenCellar</button>
+						<button onClick={ callToAction }>Mettre une bouteille en cave</button>
+						<button onClick={ callToAction }>Importer depuis OpenCellar</button>
 					</p>
 
 					<ul>
-						<li each="{ bouteilles }">
-							{ nom } { millesime.annee } ({ couleur.nom })
-						</li>
+						{ this.state.cave.bouteilles().map((bouteille) => <Bouteille data={bouteille} />)}
 					</ul>
-				</div>*/
-				}
+				</div>
 			</section>
 		)
+	}
+}
+
+class Bouteille extends React.Component {
+	render() {
+		let bouteille = this.props.data;
+		return (
+			<li>{ bouteille.nom } { bouteille.millesime.annee } ({ bouteille.couleur.nom })</li>
+		);
 	}
 }
 
@@ -79,15 +74,13 @@ class ErreurCaveVide extends React.Component {
 }
 
 class Formulaires extends React.Component {
-	/*
-		TODO
-		<formulaire-import cave={ this.props.cave }>
-		<formulaire-saisie cave={ this.props.cave }>
-	*/
 	render() {
 		return (
 			<div>
 				<a onClick={ this.props.onClose } href="#">Fermer [x]</a>
+				<FormulaireImport cave={ this.props.cave } />
+				<hr />
+				<FormulaireSaisie cave={ this.props.cave } />
 			</div>
 		)
 	}
