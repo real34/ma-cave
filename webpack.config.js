@@ -1,6 +1,6 @@
 var path = require('path');
 var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react.min.js');
+var pathToReact = path.resolve(node_modules, 'react/dist/react.js');
 
 console.log(pathToReact);
 module.exports = {
