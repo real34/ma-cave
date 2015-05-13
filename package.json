@@ -17,7 +17,6 @@
     "watch_js": "watchify $npm_package_js_build_args",
     "watch_css": "gulp watch",
     "watch": "webpack-dev-server --progress --colors --hot --inline",
-
     "deploy": "TODO !! https://www.npmjs.com/package/gh-pages-deploy"
   },
   "repository": {
@@ -42,6 +41,7 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "baconjs": "^0.7.58",
     "csv": "^0.3.7",
     "font-awesome": "^4.3.0",
     "normalize.css": "0.0.1"

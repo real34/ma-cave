@@ -1,6 +1,5 @@
 import React from 'react';
 
-import {Cave} from '../cave/local_storage';
 import FormulaireImport from './formulaire-import.jsx';
 import FormulaireSaisie from './formulaire-saisie.jsx';
 
@@ -8,8 +7,7 @@ class ContenuCave extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			enModeAjout: false,
-			cave: new Cave()
+			enModeAjout: false
 		};
 	}
 
@@ -25,15 +23,15 @@ class ContenuCave extends React.Component {
 		var callToAction = this.handleAfficherFormulaires.bind(this);
 		var formulaires = '';
 		if (this.state.enModeAjout) {
-			formulaires = <Formulaires cave={this.state.cave} onClose={this.handleCacherFormulaires.bind(this)} />;
+			formulaires = <Formulaires cave={this.props.cave} onClose={this.handleCacherFormulaires.bind(this)} />;
 		}
 
 		return (
 			<section class="cave">
-				{ this.state.cave.estVide() ? <ErreurCaveVide onCallToAction={callToAction} /> : '' }
+				{ this.props.cave.estVide() ? <ErreurCaveVide onCallToAction={callToAction} /> : '' }
 				{ formulaires }
 
-				<div class="bouteilles" if="{ !this.state.cave.estVide() }">
+				<div class="bouteilles" if="{ !this.props.cave.estVide() }">
 					<h2>Vos bouteilles</h2>
 					<p>
 						<button onClick={ callToAction }>Mettre une bouteille en cave</button>
@@ -41,7 +39,7 @@ class ContenuCave extends React.Component {
 					</p>
 
 					<ul>
-						{ this.state.cave.bouteilles().map((bouteille) => <Bouteille data={bouteille} />)}
+						{ this.props.cave.bouteilles().map((bouteille) => <Bouteille data={bouteille} />)}
 					</ul>
 				</div>
 			</section>
