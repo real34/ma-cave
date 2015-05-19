@@ -1,23 +1,27 @@
 import React from 'react';
 import Bacon from 'baconjs';
-import {Cave} from '../../cave/local_storage';
+import Cave from './projections/cave';
+
+import EventStore from '../../framework-qui-tue/eventstore';
+
+import LigneOpenCellarImportee from './LigneOpenCellarImportee';
+
+let eventStore = new EventStore('inventaire');
+let eventBus = new Bacon.Bus();
+let replayedEventBus = eventStore.replayAll().concat(eventBus);
+
+eventBus.plug(eventStore.newEvents());
 
 const ContexteInventaire = {
 	commandBus: new Bacon.Bus(),
-	cave: new Cave()
+	cave: Cave.projectFrom(replayedEventBus)
 }
 
-// TODO Create domain events from command
-// TODO Create Cave projection / read model
-// OpenCellarImporter.prototype.importRow = function(row) {
-// 	var bouteille = new Bouteille(row.Nom);
-// 	bouteille.setCouleur(new Couleur(row.Couleur));
-// 	this.commandBus.ajouteBouteille(bouteille);
-// }
-// TODO Persist event store to local storage and replay events on load (initial stream)
+let domainEvents = [LigneOpenCellarImportee];
+Bacon.fromArray(domainEvents)
+	.map((domainEvent) => domainEvent.attachTo(ContexteInventaire.commandBus))
+	.onValue((eventStream) => eventStream.onValue(eventStore.append.bind(eventStore)));
 
-ContexteInventaire.commandBus.onValue(
-	(event) => console.debug('COMMAND : ', event)
-);
+ContexteInventaire.commandBus.log('COMMANDE :'); // during development only
 
 export default ContexteInventaire;

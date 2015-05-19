@@ -22,7 +22,9 @@ module.exports = {
             { test: /\.jsx$/, exclude: /node_modules/, loader: 'jsx!babel-loader' },
         ],
         noParse: [
-            pathToReact
+            pathToReact,
+            // See https://github.com/pouchdb/pouchdb/issues/3647#issuecomment-83112389
+            /lie\.js$|\/leveldown\/|\/levelup\//
         ]
     },
     node: {

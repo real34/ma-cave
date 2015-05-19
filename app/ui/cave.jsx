@@ -51,7 +51,7 @@ class Bouteille extends React.Component {
 	render() {
 		let bouteille = this.props.data;
 		return (
-			<li>{ bouteille.nom } { bouteille.millesime.annee } ({ bouteille.couleur.nom })</li>
+			<li>{ bouteille.nom } ({ bouteille.couleur.nom })</li>
 		);
 	}
 }

@@ -11,7 +11,7 @@ import {
 	Producteur,
 	Region,
 	Taux
-} from '../bouteille';
+} from '../metier/inventaire/bouteille';
 
 class FormulaireSaisie extends React.Component {
 	ajouteBouteille(e) {

@@ -44,6 +44,7 @@
     "baconjs": "^0.7.58",
     "csv": "^0.3.7",
     "font-awesome": "^4.3.0",
-    "normalize.css": "0.0.1"
+    "normalize.css": "0.0.1",
+    "pouchdb": "^3.5.0"
   }
 }

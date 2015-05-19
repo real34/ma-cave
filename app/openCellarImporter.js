@@ -21,7 +21,7 @@ OpenCellarImporter.prototype.csvParser = function(callback) {
 	this.commandBus.plug(
 		Bacon.fromEvent(parser, 'record', (row) => {
 			return {
-				type: 'ImportOpenCellarRow',
+				type: 'ImporterLigneOpenCellar',
 				data: row
 			}
 		})
