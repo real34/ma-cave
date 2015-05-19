@@ -5,7 +5,7 @@ var pathToReact = path.resolve(node_modules, 'react/dist/react.js');
 console.log(pathToReact);
 module.exports = {
     entry: {
-        app: ['webpack/hot/dev-server', './app/main.js']
+        app: ['./app/main.js']
     },
     output: {
         path: "./public",
