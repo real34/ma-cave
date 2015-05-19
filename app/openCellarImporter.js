@@ -1,11 +1,9 @@
+var Bacon = require('baconjs');
 var csv = require('csv');
-var Bouteille = require('./bouteille').Bouteille;
-var Couleur = require('./bouteille').Couleur;
-
 var csvFormatOptions = { delimiter: ';', columns: true };
 
-var OpenCellarImporter = function (cave) {
-	this.cave = cave;
+var OpenCellarImporter = function (commandBus) {
+	this.commandBus = commandBus;
 }
 
 OpenCellarImporter.prototype.importCsv = function(csvFilePathOrString, callback) {
@@ -17,16 +15,19 @@ OpenCellarImporter.prototype.importCsvString = function(content, callback) {
 };
 
 OpenCellarImporter.prototype.csvParser = function(callback) {
+	let parser = csv();
 	callback = callback || function() {};
-	return csv()
-		.on('record', this.importRow.bind(this))
-		.on('end', callback);
-}
 
-OpenCellarImporter.prototype.importRow = function(row) {
-	var bouteille = new Bouteille(row.Nom);
-	bouteille.setCouleur(new Couleur(row.Couleur));
-	this.cave.ajouteBouteille(bouteille);
+	this.commandBus.plug(
+		Bacon.fromEvent(parser, 'record', (row) => {
+			return {
+				type: 'ImporterLigneOpenCellar',
+				data: row
+			}
+		})
+	);
+
+	return parser.on('end', callback);
 }
 
 module.exports = OpenCellarImporter;
