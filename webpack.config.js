@@ -5,11 +5,11 @@ var pathToReact = path.resolve(node_modules, 'react/dist/react.js');
 console.log(pathToReact);
 module.exports = {
     entry: {
-    	app: ['webpack/hot/dev-server', './app/main.js']
+        app: ['webpack/hot/dev-server', './app/main.js']
     },
     output: {
-    	path: "./public",
-    	filename: "app.js"
+        path: "./public",
+        filename: "app.js"
     },
     resolve: {
         alias: {
@@ -17,17 +17,19 @@ module.exports = {
         }
     },
     module: {
-	    loaders: [
-	        { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-	        { test: /\.jsx$/, exclude: /node_modules/, loader: 'jsx!babel-loader' },
-	    ],
-	    noParse: [pathToReact]
-	},
-	node: {
-	 	// see https://github.com/josephsavona/valuable/issues/9
-		fs: "empty"
-	},
-	devServer: {
-		contentBase: "./public"
-	}
+        loaders: [
+            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
+            { test: /\.jsx$/, exclude: /node_modules/, loader: 'jsx!babel-loader' },
+        ],
+        noParse: [
+            pathToReact
+        ]
+    },
+    node: {
+        // see https://github.com/josephsavona/valuable/issues/9
+        fs: "empty"
+    },
+    devServer: {
+        contentBase: "./public"
+    }
 };
