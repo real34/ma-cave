@@ -13,11 +13,17 @@
   "scripts": {
     "test": "$npm_package_js_test_cmd --reporter list",
     "tdd": "$npm_package_js_test_cmd --reporter min --watch",
-    "build": "browserify $npm_package_js_build_args",
-    "watch_js": "watchify $npm_package_js_build_args",
+    "build": "webpack",
     "watch_css": "gulp watch",
     "watch": "webpack-dev-server --progress --colors --hot --inline",
-    "deploy": "TODO !! https://www.npmjs.com/package/gh-pages-deploy"
+    "deploy": "gh-pages-deploy"
+  },
+  "gh-pages-deploy": {
+    "staticpath": "public",
+    "prep": [
+      "build"
+    ],
+    "noprompt": false
   },
   "repository": {
     "type": "git",
@@ -33,6 +39,7 @@
     "babel-core": "^4.7.12",
     "babel-loader": "^4.2.0",
     "chai": "^1.9.0",
+    "gh-pages-deploy": "^0.3.0",
     "jsx-loader": "^0.12.2",
     "mocha": "^1.17.1",
     "node-neat": "^1.1.0",
