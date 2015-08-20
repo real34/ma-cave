@@ -48,6 +48,8 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
+    "@cycle/core": "^3.1.0",
+    "@cycle/dom": "^5.0.1",
     "baconjs": "^0.7.58",
     "csv": "^0.3.7",
     "font-awesome": "^4.3.0",
