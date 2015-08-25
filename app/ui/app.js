@@ -37,25 +37,26 @@ import {hJSX} from '@cycle/dom';
 
 import Layout from './layout';
 import Presentation from './presentation.js';
+import Cave from './cave.js';
 
-function intent(DOM) {
-  return {};
-}
+function main(responses) {
+  let cave = Cave(responses);
 
-function model(actions) {
-  return {};
-}
-
-function view(state$) {
-  return Rx.Observable.just(
-    <div>
+  let route$ = Rx.Observable.merge(cave.Router);
+  let view$ = responses.Router.map(children => <div>
     { Layout.Header() }
+
     { Presentation() }
+    { children }
 
     { Layout.Footer() }
-    </div>
-  );
-  // <Cave cave={this.state.cave}/>
+  </div>);
+
+  return {
+    DOM: view$,
+    Router: route$
+  };
 }
 
-export default {intent, model, view};
+
+export default main;

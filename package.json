@@ -52,6 +52,7 @@
     "@cycle/dom": "^5.0.1",
     "baconjs": "^0.7.58",
     "csv": "^0.3.7",
+    "cycle-director": "^0.3.2",
     "font-awesome": "^4.3.0",
     "normalize.css": "0.0.1",
     "pouchdb": "^3.5.0"
