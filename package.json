@@ -15,7 +15,7 @@
     "tdd": "$npm_package_js_test_cmd --reporter min --watch",
     "build": "webpack",
     "watch_css": "gulp watch",
-    "watch": "webpack-dev-server --progress --colors --hot --inline",
+    "start": "webpack-dev-server --progress --colors --hot --inline",
     "deploy": "gh-pages-deploy"
   },
   "gh-pages-deploy": {

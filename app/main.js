@@ -1,11 +1,5 @@
-// import React from 'react';
-
-// import MaCaveApp from './ui/app.jsx';
-
-// React.render(<MaCaveApp />, document.getElementById('ma-cave-app'));
-
 /** @jsx hJSX */
-import {run, Rx} from '@cycle/core';
+import {run} from '@cycle/core';
 import {makeDOMDriver, hJSX} from '@cycle/dom';
 import app from './ui/app.js';
 

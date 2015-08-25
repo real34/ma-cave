@@ -49,10 +49,10 @@ function model(actions) {
 function view(state$) {
   return Rx.Observable.just(
     <div>
-    { Layout.Header.view() }
-    { Presentation.view() }
+    { Layout.Header() }
+    { Presentation() }
 
-    { Layout.Footer.view() }
+    { Layout.Footer() }
     </div>
   );
   // <Cave cave={this.state.cave}/>
