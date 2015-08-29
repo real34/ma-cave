@@ -1,33 +1,20 @@
-var Bacon = require('baconjs');
-var csv = require('csv');
-var csvFormatOptions = { delimiter: ';', columns: true };
+import {Rx} from '@cycle/core';
+import csv from 'fast-csv';
 
-var OpenCellarImporter = function (commandBus) {
-  this.commandBus = commandBus;
+const csvFormatOptions = {
+  delimiter: ';',
+  headers: true
 };
 
-OpenCellarImporter.prototype.importCsv = function (csvFilePathOrString, callback) {
-  this.csvParser(callback).from(csvFilePathOrString, csvFormatOptions);
-};
+function fromString (content) {
+  return makeObservable(csv.fromString(content, csvFormatOptions));
+}
 
-OpenCellarImporter.prototype.importCsvString = function (content, callback) {
-  this.csvParser(callback).from.string(content, csvFormatOptions);
-};
+function makeObservable (parser) {
+  return Rx.Observable.create(function (observer) {
+    parser.on('data', observer.onNext.bind(observer));
+    parser.on('end', observer.onCompleted.bind(observer));
+  });
+}
 
-OpenCellarImporter.prototype.csvParser = function (callback) {
-  let parser = csv();
-  callback = callback || function () {};
-
-  this.commandBus.plug(
-    Bacon.fromEvent(parser, 'record', (row) => {
-      return {
-        type: 'ImporterLigneOpenCellar',
-        data: row
-      };
-    })
-  );
-
-  return parser.on('end', callback);
-};
-
-module.exports = OpenCellarImporter;
+module.exports = { fromString };
