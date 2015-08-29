@@ -1,33 +1,21 @@
-// import React from 'react';
-
-// import OpenCellarImporter from '../openCellarImporter';
-// import ContexteInventaire from '../metier/inventaire';
-
-// class FormulaireImport extends React.Component {
-// 	importerFichier(e) {
-// 		let reader = new FileReader();
-// 		reader.onload = (e) => (new OpenCellarImporter(ContexteInventaire.commandBus)).importCsvString(e.target.result);
-// 		reader.readAsText(e.target.files[0]);
-// 	}
-
-// 	render() {
-// 		return (
-// 			<form>
-// 				<input type='file' onChange={ this.importerFichier.bind(this) } />
-// 				Importer un fichier CSV OpenCellar
-// 			</form>
-// 		);
-// 	}
-// }
-
-// export default FormulaireImport;
-
 /** @jsx hJSX */
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
+import OpenCellarImporter from '../openCellarImporter';
 
 function main (responses, basePath = '/') {
   const route$ = Rx.Observable.just({ url: basePath + '/importer-depuis-opencellar', on: view });
+
+  const { command$ } = model(intent(responses));
+
+  // TODO Export to a DomainCommand driver
+  command$
+    .tap(
+      e => console.debug('next:', e),
+      err => console.debug('err:', err),
+      () => console.debug('completed')
+    )
+    .subscribe();
 
   return {
     Router: route$
@@ -41,7 +29,26 @@ function view () {
       Importer un fichier CSV OpenCellar
     </form>
   </section>;
-  //  onChange={ this.importerFichier.bind(this) }
+}
+
+function intent (responses) {
+  const importFile$ = responses.DOM.get('.import-opencellar input', 'change')
+    .map(e => e.target.files[0])
+    .flatMap(file => Rx.Observable.create(function (observer) {
+      let reader = new window.FileReader();
+      reader.onload = e => observer.onNext(e.target.result);
+      reader.readAsText(file);
+    }));
+
+  return { importFile$ };
+}
+
+function model ({importFile$}) {
+  const command$ = importFile$
+    .flatMap(content => OpenCellarImporter.fromString(content))
+    .map(row => ({ type: 'ImporterLigneOpenCellar', data: row }));
+
+  return { command$ };
 }
 
 export default main;
