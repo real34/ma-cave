@@ -11,7 +11,9 @@
   "js_build_args": "app/main.js -t babelify -o public/js/app.js",
   "js_test_cmd": "mocha --no-colors --compilers js:babel/register --recursive",
   "scripts": {
+    "lint": "semistandard app/*.js app/**/*.js",
     "test": "$npm_package_js_test_cmd --reporter list",
+    "posttest": "npm run lint",
     "tdd": "$npm_package_js_test_cmd --reporter min --watch",
     "build": "webpack",
     "watch_css": "gulp watch",
@@ -44,6 +46,7 @@
     "mocha": "^1.17.1",
     "node-neat": "^1.1.0",
     "react": "^0.13.0",
+    "semistandard": "^7.0.2",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
   },

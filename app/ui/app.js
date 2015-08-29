@@ -39,7 +39,7 @@ import Layout from './layout';
 import Presentation from './presentation.js';
 import Cave from './cave.js';
 
-function main(responses) {
+function main (responses) {
   let cave = Cave(responses);
 
   let route$ = Rx.Observable.merge(cave.Router);
@@ -57,6 +57,5 @@ function main(responses) {
     Router: route$
   };
 }
-
 
 export default main;

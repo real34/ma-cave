@@ -13,7 +13,7 @@
 // 	render() {
 // 		return (
 // 			<form>
-// 				<input type="file" onChange={ this.importerFichier.bind(this) } />
+// 				<input type='file' onChange={ this.importerFichier.bind(this) } />
 // 				Importer un fichier CSV OpenCellar
 // 			</form>
 // 		);
@@ -26,21 +26,21 @@
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
 
-function main(responses, basePath = '/') {
-  const route$ = Rx.Observable.just({ url: basePath + "/importer-depuis-opencellar", on: view });
+function main (responses, basePath = '/') {
+  const route$ = Rx.Observable.just({ url: basePath + '/importer-depuis-opencellar', on: view });
 
   return {
     Router: route$
-  }
+  };
 }
 
-function view() {
-  return <section className="import-opencellar">
+function view () {
+  return <section className='import-opencellar'>
     <form>
-      <input type="file" />
+      <input type='file' />
       Importer un fichier CSV OpenCellar
     </form>
-  </section>
+  </section>;
   //  onChange={ this.importerFichier.bind(this) }
 }
 
