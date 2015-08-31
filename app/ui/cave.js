@@ -16,7 +16,8 @@ function main (responses) {
   const formulaireImport = FormulaireImport(responses, '/cave');
 
   return {
-    Router: route$.merge(formulaireImport.Router)
+    Router: route$.merge(formulaireImport.Router),
+    Inventaire: formulaireImport.Inventaire
   };
 }
 

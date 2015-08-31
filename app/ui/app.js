@@ -54,7 +54,8 @@ function main (responses) {
 
   return {
     DOM: view$,
-    Router: route$
+    Router: route$,
+    Inventaire: cave.Inventaire
   };
 }
 

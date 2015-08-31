@@ -1,16 +1,4 @@
-import Bacon from 'baconjs';
-
-function init(commandBus) {
-	return commandBus
-		.flatMap(extractSupportedCommands)
-		.map(asEvent);
-}
-
-function extractSupportedCommands(command) {
-	return (command.type === 'ImporterLigneOpenCellar')
-		? command.data
-		: Bacon.never();
-}
+import {Rx} from '@cycle/core';
 
 function asEvent(ligne) {
 	return {
@@ -19,6 +7,11 @@ function asEvent(ligne) {
 	};
 }
 
-export default {
-	attachTo: init
-}
+const commands = new Rx.Subject();
+
+const events = commands
+	.filter(command => command.type === 'ImporterLigneOpenCellar')
+	.pluck('data')
+	.map(asEvent);
+
+export default { commands, events };

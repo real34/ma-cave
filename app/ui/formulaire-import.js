@@ -8,17 +8,9 @@ function main (responses, basePath = '/') {
 
   const { command$ } = model(intent(responses));
 
-  // TODO Export to a DomainCommand driver
-  command$
-    .tap(
-      e => console.debug('next:', e),
-      err => console.debug('err:', err),
-      () => console.debug('completed')
-    )
-    .subscribe();
-
   return {
-    Router: route$
+    Router: route$,
+    Inventaire: command$
   };
 }
 
@@ -32,7 +24,7 @@ function view () {
 }
 
 function intent (responses) {
-  const importFile$ = responses.DOM.get('.import-opencellar input', 'change')
+  const importFile$ = responses.DOM.select('.import-opencellar input').events('change')
     .map(e => e.target.files[0])
     .flatMap(file => Rx.Observable.create(function (observer) {
       let reader = new window.FileReader();
