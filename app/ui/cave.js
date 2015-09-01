@@ -26,28 +26,9 @@ function main (responses) {
 }
 
 function view (state$) {
-  const timer$ = Rx.Observable.interval(1000).map(t => t + 1).startWith(1);
-
-  state$.subscribe(x => console.debug('view ', x));
-
-  return Rx.Observable.combineLatest(timer$, time => <section className='cave'>
-    CAVE {time}
-    {renderErreurCaveVide()}
+  return state$.map(cave => <section className='cave'>
+    { cave.estVide() ? renderErreurCaveVide() : renderContent(cave) }
   </section>);
-   // { this.props.cave.estVide() ? <ErreurCaveVide onCallToAction={callToAction} /> : '' }
-   // { formulaires }
-
-   // <div className='bouteilles' if='{ !this.props.cave.estVide() }'>
-   //   <h2>Vos bouteilles</h2>
-   //   <p>
-   //     <button onClick={ callToAction }>Mettre une bouteille en cave</button>
-   //     <button onClick={ callToAction }>Importer depuis OpenCellar</button>
-   //   </p>
-
-   //   <ul>
-   //     { this.props.cave.bouteilles().map((bouteille) => <Bouteille data={bouteille} />)}
-   //   </ul>
-   // </div>
 }
 
 function renderErreurCaveVide () {
@@ -61,58 +42,23 @@ function renderErreurCaveVide () {
   </div>;
 }
 
-// class ContenuCave extends React.Component {
-// 	constructor(props) {
-// 		super(props);
-// 		this.state = {
-// 			enModeAjout: false
-// 		};
-// 	}
+function renderContent(cave) {
+  return <div className='bouteilles'>
+    <h2>Vos bouteilles</h2>
+    <p>
+      <button href='#/cave/mettre-des-bouteilles'>Mettre une bouteille en cave</button>
+      <button href='#/cave/importer-depuis-opencellar'>Importer depuis OpenCellar</button>
+    </p>
 
-// 	handleAfficherFormulaires() {
-// 		this.setState({ enModeAjout: true });
-// 	}
+    <ul>
+      { cave.bouteilles().map(renderBouteille) }
+    </ul>
+  </div>;
+}
 
-// 	handleCacherFormulaires() {
-// 		this.setState({ enModeAjout: false });
-// 	}
-
-// 	render() {
-// 		var callToAction = this.handleAfficherFormulaires.bind(this);
-// 		var formulaires = '';
-// 		if (this.state.enModeAjout) {
-// 			formulaires = <Formulaires cave={this.props.cave} onClose={this.handleCacherFormulaires.bind(this)} />;
-// 		}
-
-// 		return (
-// 			<section className='cave'>
-// 				{ this.props.cave.estVide() ? <ErreurCaveVide onCallToAction={callToAction} /> : '' }
-// 				{ formulaires }
-
-// 				<div className='bouteilles' if='{ !this.props.cave.estVide() }'>
-// 					<h2>Vos bouteilles</h2>
-// 					<p>
-// 						<button onClick={ callToAction }>Mettre une bouteille en cave</button>
-// 						<button onClick={ callToAction }>Importer depuis OpenCellar</button>
-// 					</p>
-
-// 					<ul>
-// 						{ this.props.cave.bouteilles().map((bouteille) => <Bouteille data={bouteille} />)}
-// 					</ul>
-// 				</div>
-// 			</section>
-// 		)
-// 	}
-// }
-
-// class Bouteille extends React.Component {
-// 	render() {
-// 		let bouteille = this.props.data;
-// 		return (
-// 			<li>{ bouteille.nom } ({ bouteille.couleur.nom })</li>
-// 		);
-// 	}
-// }
+function renderBouteille (bouteille) {
+	return <li>{ bouteille.nom } ({ bouteille.couleur.nom })</li>;
+}
 
 // class ErreurCaveVide extends React.Component {
 // 	render() {
