@@ -43,8 +43,15 @@ function makeEventStore(storeName) {
     live: true,
     include_docs: true
   });
+
   const newEvents = Rx.Observable
     .fromEvent(changes, 'create')
+    .pluck('doc', 'payload');
+
+  const replayedEvents = Rx.Observable
+    .fromPromise(db.allDocs({ include_docs: true }))
+    .pluck('rows')
+    .flatMap(rows => Rx.Observable.from(rows))
     .pluck('doc', 'payload');
 
   EventBus
@@ -57,7 +64,7 @@ function makeEventStore(storeName) {
       });
     });
 
-  return {EventBus, newEvents};
+  return {EventBus, newEvents, replayedEvents};
 }
 
 

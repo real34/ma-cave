@@ -1,6 +1,7 @@
 // import React from 'react';
 // import Bacon from 'baconjs';
-// import Cave from './projections/cave';
+import Cave from './projections/cave';
+import Trololo from './projections/trololo';
 
 // import EventStore from '../../framework-qui-tue/eventstore';
 
@@ -14,7 +15,9 @@ import LigneOpenCellarImportee from './LigneOpenCellarImportee';
 
 const ContexteInventaire = {
 	name: 'Inventaire',
-	domainEvents: [LigneOpenCellarImportee]
+	domainEvents: [LigneOpenCellarImportee],
+	projections: [Cave, Trololo]
+	// TODO sideEffects: []
 	// commandBus: new Bacon.Bus(),
 	// cave: Cave.projectFrom(replayedEventBus)
 }

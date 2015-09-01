@@ -11,8 +11,12 @@ import FormulaireImport from './formulaire-import.js';
 // import FormulaireSaisie from './formulaire-saisie.js';
 
 function main (responses) {
+  const state$ = responses.Inventaire
+    .pluck('cave', 'contenu')
+    .tap(x => console.debug('inventaire subscription', x));
+
   // TODO Improve containment in views to add a 'close' link in forms
-  const route$ = Rx.Observable.just({ url: '/', on: view });
+  const route$ = Rx.Observable.just({ url: '/', on: view.bind(null, state$) });
   const formulaireImport = FormulaireImport(responses, '/cave');
 
   return {
@@ -21,8 +25,10 @@ function main (responses) {
   };
 }
 
-function view () {
+function view (state$) {
   const timer$ = Rx.Observable.interval(1000).map(t => t + 1).startWith(1);
+
+  state$.subscribe(x => console.debug('view ', x));
 
   return Rx.Observable.combineLatest(timer$, time => <section className='cave'>
     CAVE {time}

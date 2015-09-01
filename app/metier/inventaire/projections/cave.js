@@ -1,4 +1,4 @@
-import Bacon from 'baconjs';
+import {Rx} from '@cycle/core';
 import { Bouteille, Couleur } from '../bouteille';
 
 class Cave {
@@ -16,24 +16,21 @@ class Cave {
 	}
 }
 
-function init(eventBus) {
-	const ligneImportee = eventBus.flatMap(
-		(e) => e.type === 'LigneOpenCellarImportee' ? e.ligne : Bacon.never()
-	);
+const event$ = new Rx.Subject();
 
-	return Bacon.update(
-		new Cave(),
-		[ligneImportee], nouvelleBouteilleOpenCellar
-	);
-}
+const importMod$ = event$
+	.filter(e => e.type === 'LigneOpenCellarImportee')
+	.pluck('ligne')
+	.map(ligne => function(cave) {
+		let bouteille = new Bouteille(ligne.Nom);
+		bouteille.setCouleur(new Couleur(ligne.Couleur));
+		cave.ajouteBouteille(bouteille);
+		return cave;
+	});
 
-function nouvelleBouteilleOpenCellar(cave, ligne) {
-	let bouteille = new Bouteille(ligne.Nom);
-	bouteille.setCouleur(new Couleur(ligne.Couleur));
-	cave.ajouteBouteille(bouteille);
-	return cave;
-}
+const state$ = Rx.Observable.just(Rx.helpers.identity)
+	.merge(importMod$)
+	.scan((acc, mod) => mod(acc), new Cave())
+	.map(cave => ({name: 'cave', contenu: cave}));
 
-export default {
-	projectFrom: init
-}
+export default { event$, state$ };
