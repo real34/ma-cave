@@ -1,8 +1,3 @@
-// import React from 'react';
-
-// import FormulaireImport from './formulaire-import.jsx';
-// import FormulaireSaisie from './formulaire-saisie.jsx';
-
 /** @jsx hJSX */
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
@@ -59,33 +54,5 @@ function renderContent(cave) {
 function renderBouteille (bouteille) {
 	return <li>{ bouteille.nom } ({ bouteille.couleur.nom })</li>;
 }
-
-// class ErreurCaveVide extends React.Component {
-// 	render() {
-// 		return (
-// 			<div className='erreur'>
-// 				<p>Vous n'avez pas encore ajouté de bouteilles à votre cave.</p>
-// 				<p>
-// 					<a className='action' onClick={ this.props.onCallToAction }><i className='fa fa-plus'></i> Mettez des bouteilles en cave</a>
-// 					ou <a className='action' onClick={ this.props.onCallToAction }><i className='fa fa-file'></i> Importez une cave depuis OpenCellar</a>
-// 					afin de pouvoir commencer à utiliser le site
-// 				</p>
-// 			</div>
-// 		)
-// 	}
-// }
-
-// class Formulaires extends React.Component {
-// 	render() {
-// 		return (
-// 			<div>
-// 				<a onClick={ this.props.onClose } href='#'>Fermer [x]</a>
-// 				<FormulaireImport cave={ this.props.cave } />
-// 				<hr />
-// 				<FormulaireSaisie cave={ this.props.cave } />
-// 			</div>
-// 		)
-// 	}
-// }
 
 export default main;

@@ -3,7 +3,7 @@ import {hJSX} from '@cycle/dom';
 
 function main() {
   return <header>
-    <h1>Ma cave à vin !</h1>
+    <h1><a href="/">Ma cave à vin !</a></h1>
   </header>
 }
 
