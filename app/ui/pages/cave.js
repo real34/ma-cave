@@ -3,21 +3,16 @@ import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
 
 import {BarreActions} from '../molecules';
-import {FormulaireImport, MessageErreur, ListeBouteilles} from '../organisms';
-// import FormulaireSaisie from './formulaire-saisie.js';
+import {MessageErreur, ListeBouteilles} from '../organisms';
 
 function main (responses) {
   const state$ = responses.Inventaire
     .pluck('cave', 'contenu')
     .tap(x => console.debug('inventaire subscription', x));
-
-  // TODO Improve containment in views to add a 'close' link in forms
   const route$ = Rx.Observable.just({ url: '/', on: view.bind(null, state$) });
-  const formulaireImport = FormulaireImport(responses, '/cave');
 
   return {
-    Router: route$.merge(formulaireImport.Router),
-    Inventaire: formulaireImport.Inventaire
+    Router: route$
   };
 }
 

@@ -3,13 +3,16 @@ import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
 
 import {Header, Footer, Presentation} from './organisms';
-import {Cave} from './pages';
+import {Cave, ImportCave} from './pages';
 
 function main (responses) {
-  let cave = Cave(responses);
+  // TODO Make it generic for all pages
+  const cave = Cave(responses);
+  const importCave = ImportCave(responses, '/cave');
+  const route$ = Rx.Observable.merge(cave.Router, importCave.Router);
+  const inventaire$ = Rx.Observable.merge(cave.Inventaire, importCave.Inventaire);
 
-  let route$ = Rx.Observable.merge(cave.Router);
-  let view$ = responses.Router.map(children => <div>
+  const view$ = responses.Router.map(children => <div>
     { Header() }
 
     { Presentation() }
@@ -21,7 +24,7 @@ function main (responses) {
   return {
     DOM: view$,
     Router: route$,
-    Inventaire: cave.Inventaire
+    Inventaire: inventaire$
   };
 }
 

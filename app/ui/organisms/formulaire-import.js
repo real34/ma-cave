@@ -2,30 +2,24 @@
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
 
-import csv from 'fast-csv';
-
-function main (responses, basePath = '/') {
-  const route$ = Rx.Observable.just({ url: basePath + '/importer-depuis-opencellar', on: view });
-
-  const { command$ } = model(intent(responses));
+function main (responses, name) {
+  const { importFile$ } = intent(responses, name);
 
   return {
-    Router: route$,
-    Inventaire: command$
+    DOM: view(name),
+    events: {importFile$ }
   };
 }
 
-function view () {
-  return <section className='import-opencellar'>
-    <form>
-      <input type='file' />
-      Importer un fichier CSV OpenCellar
-    </form>
-  </section>;
+function view (name) {
+  return <form className={name}>
+    <input type='file' />
+    Importer un fichier CSV OpenCellar
+  </form>;
 }
 
-function intent (responses) {
-  const importFile$ = responses.DOM.select('.import-opencellar input').events('change')
+function intent (responses, name) {
+  const importFile$ = responses.DOM.select(`.${name} input`).events('change')
     .map(e => e.target.files[0])
     .flatMap(file => Rx.Observable.create(function (observer) {
       let reader = new window.FileReader();
@@ -34,23 +28,6 @@ function intent (responses) {
     }));
 
   return { importFile$ };
-}
-
-function model ({importFile$}) {
-  const csvFormat = {
-    delimiter: ';',
-    headers: true
-  };
-
-  const command$ = importFile$
-    .map(content => csv.fromString(content, csvFormat))
-    .flatMap(parser => Rx.Observable.create(observer => {
-      parser.on('data', observer.onNext.bind(observer));
-      parser.on('end', observer.onCompleted.bind(observer));
-    }))
-    .map(row => ({ type: 'ImporterLigneOpenCellar', data: row }));
-
-  return { command$ };
 }
 
 export default main;
