@@ -20,7 +20,7 @@ function makeEventStore(storeName) {
     .fromPromise(db.allDocs({ include_docs: true }))
     .pluck('rows')
     .flatMap(rows => Rx.Observable.from(rows))
-    .pluck('doc', 'payload');
+    .pluck('doc');
 
   EventBus
     .tap(e => console.debug(`event store ${storeName} received: `, e))
@@ -28,6 +28,7 @@ function makeEventStore(storeName) {
       // TODO Error handling
       db.post({
         type: event.type || 'unknown',
+        createdAt: Date.now(),
         payload: event
       });
     });

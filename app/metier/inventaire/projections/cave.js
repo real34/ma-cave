@@ -8,8 +8,8 @@ class Cave {
 	estVide() {
 		return this._bouteilles.length === 0;
 	}
-	ajouteBouteille(bouteille) {
-		this._bouteilles.push(bouteille);
+	ajouteBouteille(infos, dateAjout = Date.now()) {
+		this._bouteilles.push({infos, dateAjout});
 	}
 	bouteilles() {
 		return this._bouteilles;
@@ -20,11 +20,12 @@ const event$ = new Rx.Subject();
 
 const importMod$ = event$
 	.filter(e => e.type === 'LigneOpenCellarImportee')
-	.pluck('ligne')
-	.map(ligne => function(cave) {
+	.map(event => function(cave) {
+		const ligne = event.payload.ligne;
 		let bouteille = new Bouteille(ligne.Nom);
+
 		bouteille.setCouleur(new Couleur(ligne.Couleur));
-		cave.ajouteBouteille(bouteille);
+		cave.ajouteBouteille(bouteille, event.createdAt);
 		return cave;
 	});
 
