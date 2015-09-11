@@ -36,3 +36,4 @@ function makeEventStore(storeName) {
 }
 
 export default makeEventStore;
+export {makeEventStore};
