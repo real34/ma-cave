@@ -2,7 +2,7 @@
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
 
-import FormulaireImport from './formulaire-import.js';
+import {FormulaireImport} from '../organisms';
 // import FormulaireSaisie from './formulaire-saisie.js';
 
 function main (responses) {

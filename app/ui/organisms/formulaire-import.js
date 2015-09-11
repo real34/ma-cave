@@ -1,7 +1,8 @@
 /** @jsx hJSX */
 import {Rx} from '@cycle/core';
 import {hJSX} from '@cycle/dom';
-import OpenCellarImporter from '../openCellarImporter';
+
+import csv from 'fast-csv';
 
 function main (responses, basePath = '/') {
   const route$ = Rx.Observable.just({ url: basePath + '/importer-depuis-opencellar', on: view });
@@ -36,8 +37,17 @@ function intent (responses) {
 }
 
 function model ({importFile$}) {
+  const csvFormat = {
+    delimiter: ';',
+    headers: true
+  };
+
   const command$ = importFile$
-    .flatMap(content => OpenCellarImporter.fromString(content))
+    .map(content => csv.fromString(content, csvFormat))
+    .flatMap(parser => Rx.Observable.create(observer => {
+      parser.on('data', observer.onNext.bind(observer));
+      parser.on('end', observer.onCompleted.bind(observer));
+    }))
     .map(row => ({ type: 'ImporterLigneOpenCellar', data: row }));
 
   return { command$ };
