@@ -1,10 +1,10 @@
 /** @jsx hJSX */
 import {hJSX} from '@cycle/dom';
+import styles from './footer.css'
 
 function main() {
-  return <footer>
-    <hr/>
-    <div className="a-propos">
+  return <footer className={ styles.root }>
+    <div className={ styles.aPropos }>
       <h4>Qui sommes-nous ?</h4>
       <p>
         <i className="fa fa-twitter"></i>
@@ -15,7 +15,7 @@ function main() {
         Le code source est disponible sur <a href="http://github.com/real34/ma-cave">Github</a> !
       </p>
     </div>
-    <div className="suggestions">
+    <div className={ styles.suggestions }>
       <h4>Un problème, des suggestions ? Contactez-nous !</h4>
       <form action="//api.formspree.com/contact@pierre-martin.fr" method="post">
         <label for="nom">Nom :</label> <input type="text" name="nom" />

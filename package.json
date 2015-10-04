@@ -16,8 +16,7 @@
     "posttest": "npm run lint",
     "tdd": "$npm_package_js_test_cmd --reporter min --watch",
     "build": "webpack",
-    "watch_css": "gulp watch",
-    "start": "webpack-dev-server --progress --colors --hot --inline",
+    "start": "webpack-dev-server --progress --colors --hot --inline --host 0.0.0.0",
     "deploy": "gh-pages-deploy"
   },
   "gh-pages-deploy": {
@@ -41,12 +40,16 @@
     "babel-core": "^4.7.12",
     "babel-loader": "^4.2.0",
     "chai": "^1.9.0",
+    "css-loader": "^0.19.0",
+    "file-loader": "^0.8.4",
     "gh-pages-deploy": "^0.3.0",
     "jsx-loader": "^0.12.2",
     "mocha": "^1.17.1",
     "node-neat": "^1.1.0",
     "react": "^0.13.0",
     "semistandard": "^7.0.2",
+    "style-loader": "^0.12.4",
+    "url-loader": "^0.5.6",
     "webpack": "^1.7.3",
     "webpack-dev-server": "^1.7.0"
   },

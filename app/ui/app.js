@@ -5,6 +5,8 @@ import {hJSX} from '@cycle/dom';
 import {Header, Footer, Presentation} from './organisms';
 import {Cave, ImportCave} from './pages';
 
+import styles from './app.css';
+
 function main (responses) {
   // TODO Make it generic for all pages
   const cave = Cave(responses);
@@ -12,7 +14,7 @@ function main (responses) {
   const route$ = Rx.Observable.merge(cave.Router, importCave.Router);
   const inventaire$ = Rx.Observable.merge(cave.Inventaire, importCave.Inventaire);
 
-  const view$ = responses.Router.map(children => <div>
+  const view$ = responses.Router.map(children => <div className={ styles.root }>
     { Header() }
 
     { Presentation() }

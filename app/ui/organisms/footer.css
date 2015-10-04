@@ -1,0 +1,15 @@
+.root {
+	border-top: 1px solid gray;
+	display: flex;
+	flex-wrap: nowrap;
+	justify-content: space-around;
+}
+
+.root > * {
+	flex: auto;
+}
+
+.suggestions form {
+	display: flex;
+	flex-direction: column;
+}
