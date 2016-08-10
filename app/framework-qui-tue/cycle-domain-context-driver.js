@@ -31,8 +31,7 @@ function makeDomainContextDriver (domainDefinition, eventStore) {
           stateObject[state.name] = state;
           return stateObject;
         }, {});
-      }))
-      .tap(x => console.debug('states', x));
+      }));
   };
 }
 
