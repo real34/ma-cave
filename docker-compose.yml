@@ -1,0 +1,13 @@
+app:
+  image: node:6.3.1
+  volumes:
+    - .:/project
+    - ~/.npm:/root/.npm
+  working_dir: /project
+  expose:
+    - "8080"
+  environment:
+    VIRTUAL_HOST: ma-cave.test
+    VIRTUAL_PORT: 8080
+  entrypoint: npm
+  command: start
