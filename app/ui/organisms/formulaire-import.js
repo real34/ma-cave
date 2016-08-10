@@ -24,7 +24,7 @@ function intent (responses, name) {
     .flatMap(file => Rx.Observable.create(function (observer) {
       let reader = new window.FileReader();
       reader.onload = e => observer.onNext(e.target.result);
-      reader.readAsText(file);
+      reader.readAsText(file, 'ISO-8859-1');
     }));
 
   return { importFile$ };
