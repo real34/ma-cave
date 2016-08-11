@@ -1,37 +1,32 @@
-import {Rx} from '@cycle/core';
+import xs from 'xstream';
+import concat from 'xstream/extra/concat'
 
 function makeDomainContextDriver (domainDefinition, eventStore) {
   // TODO Create an internal subscriber to prevent binding multiple times
   console.debug('making domain driver for context', domainDefinition.name);
-  const replayedAndLiveEvent$ = eventStore.replayedEvents.concat(eventStore.newEvents);
+  const replayedAndLiveEvent$ = concat(eventStore.replayedEvents, eventStore.newEvents);
 
   return function (command$) {
-    console.debug('new subscription');
-    for (let event of domainDefinition.domainEvents) {
-      command$.subscribe(event.commands);
-      event.events.subscribe(eventStore.EventBus);
+    for (let eventFactory of domainDefinition.domainEvents) {
+      eventFactory(command$).addListener(eventStore.EventBus);
     }
 
-    for (let projection of domainDefinition.projections) {
-      replayedAndLiveEvent$.subscribe(projection.event$);
-    }
+    const states = domainDefinition.projections.map(
+      (projectionFactory) => projectionFactory(replayedAndLiveEvent$)
+    )
 
-    command$.subscribe(
-      c => console.debug('command: ', c),
-      err => console.debug('err:', err),
-      () => console.debug('completed')
-    );
+    command$.addListener({
+      next: c => console.debug('command: ', c),
+      error: err => console.debug('err:', err),
+      complete: () => console.debug('completed')
+    });
 
-    // TODO Add a "get()" method to directly access a path
-    return Rx.Observable.from(domainDefinition.projections)
-      .pluck('state$')
-      .toArray()
-      .flatMap(states => Rx.Observable.combineLatest(states, (...states) => {
-        return states.reduce((stateObject, state) => {
-          stateObject[state.name] = state;
-          return stateObject;
-        }, {});
-      }));
+    return xs
+      .combine(...states)
+      .map((states) => states.reduce((stateObject, state) => {
+        stateObject[state.name] = state;
+        return stateObject;
+      }, {}))
   };
 }
 

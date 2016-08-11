@@ -1,6 +1,7 @@
-/** @jsx hJSX */
-import {hJSX} from '@cycle/dom';
+import {ul, li, a} from '@cycle/dom';
 
-export default (actions) => <ul className='actions'>
-  {actions.map(action => <li><a href={action.href}>{action.title}</a></li>)}
-</ul>;
+export default (actions) => ul(`.actions`, actions.map(
+  (action) => li([
+    a({attrs: {href: action.href}}, action.title)
+  ])
+));

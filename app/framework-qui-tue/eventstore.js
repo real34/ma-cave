@@ -1,10 +1,10 @@
-import {Rx} from '@cycle/core';
+import xs from 'xstream';
+import fromEvent from 'xstream/extra/fromEvent'
 import PouchDB from 'pouchdb';
 window.PouchDB = PouchDB;
 
 function makeEventStore(storeName) {
   const db = new PouchDB(storeName);
-  const EventBus = new Rx.Subject();
 
   const changes = db.changes({
     since: 'now',
@@ -12,26 +12,32 @@ function makeEventStore(storeName) {
     include_docs: true
   });
 
-  const newEvents = Rx.Observable
-    .fromEvent(changes, 'create')
-    .pluck('doc', 'payload');
+  const newEvents = fromEvent(changes, 'create')
+    .map((v) => v.doc.payload);
 
-  const replayedEvents = Rx.Observable
+  const replayedEvents = xs
     .fromPromise(db.allDocs({ include_docs: true }))
-    .pluck('rows')
-    .flatMap(rows => Rx.Observable.from(rows))
-    .pluck('doc');
+    .map((docs) => xs.fromArray(docs.rows))
+    .flatten()
+    .map((row) => row.doc);
 
-  EventBus
-    .tap(e => console.debug(`event store ${storeName} received: `, e))
-    .subscribe(event => {
+  const EventBus = {
+    next: (event) => {
+      console.debug(`event store ${storeName} received: `, event);
       // TODO Error handling
       db.post({
         type: event.type || 'unknown',
         createdAt: Date.now(),
         payload: event
       });
-    });
+    },
+    error: (err) => {
+      console.error('The Event Stream gave me an error: ', err);
+    },
+    complete: () => {
+      console.log('The Event Stream told me it is done.');
+    }
+  }
 
   return {EventBus, newEvents, replayedEvents};
 }

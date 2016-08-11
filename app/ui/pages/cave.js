@@ -1,35 +1,40 @@
-/** @jsx hJSX */
-import {Rx} from '@cycle/core';
-import {hJSX} from '@cycle/dom';
-
+import xs from 'xstream';
+import {section, span, a, i, div} from '@cycle/dom';
 import {BarreActions} from '../molecules';
 import {MessageErreur, ListeBouteilles} from '../organisms';
 
-function main (responses) {
-  const state$ = responses.Inventaire
-    .pluck('cave', 'contenu')
-    .tap(x => console.debug('inventaire subscription', x));
-  const route$ = Rx.Observable.just({ url: '/', on: view.bind(null, state$) });
+function main (sources) {
+  const state$ = sources.Inventaire
+    .map((data) => data.cave.contenu);
 
   return {
-    Router: route$
-  };
+    DOM: view(state$)
+  }
 }
 
 function view (state$) {
-  return state$.map(cave => <section className='cave'>
-    { cave.estVide() ? renderErreurCaveVide() : renderContent(cave) }
-  </section>);
+  return state$
+    .map((cave) => section(
+      '.cave',
+      [cave.estVide() ? renderErreurCaveVide() : renderContent(cave)]
+    ));
 }
 
 function renderErreurCaveVide () {
   return MessageErreur(
     "Vous n'avez pas encore ajouté de bouteilles à votre cave.",
-    <span>
-      <a className='action' href='#/cave/mettre-des-bouteilles'><i className='fa fa-plus'></i> Mettez des bouteilles en cave</a>
-      ou <a className='action' href='#/cave/importer-depuis-opencellar'><i className='fa fa-file'></i> Importez une cave depuis OpenCellar</a>
-      afin de pouvoir commencer à utiliser le site
-    </span>
+    span([
+      a('.action', {attrs: {href: '#/cave/mettre-des-bouteilles'}}, [
+        i('.fa.fa-plus'),
+        ' Mettez des bouteilles en cave'
+      ]),
+      ' ou ',
+      a('.action', {attrs: {href: '#/cave/importer-depuis-opencellar'}}, [
+        i('.fa.fa-file'),
+        ' Importez une cave depuis OpenCellar'
+      ]),
+      'afin de pouvoir commencer à utiliser le site'
+    ])
   );
 }
 
@@ -38,10 +43,10 @@ function renderContent(cave) {
     { href: '#/cave/mettre-des-bouteilles', title: 'Mettre une bouteille en cave' },
     { href: '#/cave/importer-depuis-opencellar', title: 'Importer depuis OpenCellar' }
   ];
-  return <div>
-    {BarreActions(actions)}
-    {ListeBouteilles("Vos bouteilles", cave.bouteilles())}
-  </div>;
+  return div([
+    BarreActions(actions),
+    ListeBouteilles("Vos bouteilles", cave.bouteilles())
+  ]);
 }
 
 export default main;

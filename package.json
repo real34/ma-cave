@@ -54,13 +54,13 @@
     "webpack-dev-server": "^1.7.0"
   },
   "dependencies": {
-    "@cycle/core": "^3.1.0",
-    "@cycle/dom": "^5.0.1",
-    "baconjs": "^0.7.58",
-    "cycle-director": "^0.3.2",
+    "@cycle/dom": "^12.0.3",
+    "@cycle/xstream-run": "^3.0.4",
+    "cyclic-router": "^2.1.2",
     "fast-csv": "^0.6.0",
     "font-awesome": "^4.3.0",
     "normalize.css": "0.0.1",
-    "pouchdb": "^3.5.0"
+    "pouchdb": "^3.5.0",
+    "xstream": "^5.3.2"
   }
 }

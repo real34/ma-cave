@@ -1,4 +1,4 @@
-import {Rx} from '@cycle/core';
+import xs from 'xstream';
 
 function asEvent(ligne) {
 	return {
@@ -7,11 +7,6 @@ function asEvent(ligne) {
 	};
 }
 
-const commands = new Rx.Subject();
-
-const events = commands
+export default (command$) => command$
 	.filter(command => command.type === 'ImporterLigneOpenCellar')
-	.pluck('data')
-	.map(asEvent);
-
-export default { commands, events };
+	.map((command) => asEvent(command.data));
