@@ -16,5 +16,5 @@ const main = app;
 run(main, {
   DOM: makeDOMDriver('#ma-cave-app'),
   Inventaire: makeDomainContextDriver(inventaireContext, makeEventStore('inventaire')),
-  Router: makeRouterDriver(createHashHistory())
+  Router: makeRouterDriver(createHashHistory(), { capture: true })
 });

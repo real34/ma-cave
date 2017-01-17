@@ -1,4 +1,5 @@
 import xs from 'xstream';
+import debounce from 'xstream/extra/debounce';
 import {section, h2, p} from '@cycle/dom';
 import {FormulaireImport} from '../organisms';
 
@@ -10,6 +11,7 @@ function main (sources) {
 
   return {
     DOM: formulaireImport.DOM.map((form) => view(form)),
+    Router: command$.compose(debounce(100)).mapTo('/'),
     Inventaire: command$
   };
 }

@@ -13,7 +13,7 @@ function main (sources) {
 
   const page$ = match$.map(({path, value}) => value(
     Object.assign({}, sources, {
-      router: sources.Router.path(path)
+      Router: sources.Router.path(path)
     }
   )));
 
@@ -29,7 +29,8 @@ function main (sources) {
 
   return {
     DOM: view$,
-    Inventaire: page$.map((page) => page.Inventaire || xs.empty()).flatten()
+    Router: page$.map((c)=> c.Router || xs.never()).flatten(),
+    Inventaire: page$.map((page) => page.Inventaire || xs.never()).flatten()
   };
 }
 
