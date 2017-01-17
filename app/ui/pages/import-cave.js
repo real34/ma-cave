@@ -1,30 +1,28 @@
 import xs from 'xstream';
+import {section, h2, p} from '@cycle/dom';
 import {FormulaireImport} from '../organisms';
 
 import csv from 'fast-csv';
 
-function main (sources, basePath = '/') {
+function main (sources) {
   const formulaireImport = FormulaireImport(sources, 'import-opencellar');
-  const route$ = sources.Router
-    .define({ [basePath + '/importer-depuis-opencellar']: view })
-    .map(({value}) => value(formulaireImport.DOM));
   const { command$ } = model(formulaireImport.events);
 
   return {
-    Router: route$,
+    DOM: formulaireImport.DOM.map((form) => view(form)),
     Inventaire: command$
   };
 }
 
 function view (formulaire) {
-  return <section className='import-cave'>
-    <h2>Importer des Bouteilles</h2>
-    <p>
+  return section('.import-cave', [
+    h2('Importer des Bouteilles'),
+    p(`
       Vous pouvez importer des bouteilles depuis un fichier CSV issu d'OpenCellar.
       Utilisez le formulaire ci-dessous.
-    </p>
-    {formulaire}
-  </section>;
+    `),
+    formulaire
+  ]);
 }
 
 function model ({importFile$}) {
@@ -39,7 +37,8 @@ function model ({importFile$}) {
       start: (listener) => {
         parser.on('data', listener.next.bind(listener));
         parser.on('end', listener.completed.bind(listener));
-      }
+      },
+      stop: () => {}
     }))
     .flatten()
     .map(row => ({ type: 'ImporterLigneOpenCellar', data: row }));

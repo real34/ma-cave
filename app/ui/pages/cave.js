@@ -23,7 +23,7 @@ function view (state$) {
 function renderErreurCaveVide () {
   return MessageErreur(
     "Vous n'avez pas encore ajouté de bouteilles à votre cave.",
-    span([
+    [
       a('.action', {attrs: {href: '#/cave/mettre-des-bouteilles'}}, [
         i('.fa.fa-plus'),
         ' Mettez des bouteilles en cave'
@@ -33,8 +33,8 @@ function renderErreurCaveVide () {
         i('.fa.fa-file'),
         ' Importez une cave depuis OpenCellar'
       ]),
-      'afin de pouvoir commencer à utiliser le site'
-    ])
+      ' afin de pouvoir commencer à utiliser le site'
+    ]
   );
 }
 
