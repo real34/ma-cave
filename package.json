@@ -9,7 +9,7 @@
     "height": 600
   },
   "scripts": {
-    "lint": "standard --fix",
+    "lint": "standard --fix --env jest --env browser",
     "test": "jest",
     "tdd": "jest --watch",
     "build": "webpack",
@@ -17,8 +17,7 @@
     "deploy": "gh-pages-deploy"
   },
   "standard": {
-    "ignore": ["/public"],
-    "globals": ["describe", "it", "expect"]
+    "ignore": ["/public"]
   },
   "gh-pages-deploy": {
     "staticpath": "public",
