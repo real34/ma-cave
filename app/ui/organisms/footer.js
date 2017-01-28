@@ -1,7 +1,7 @@
-import {footer, div, h4, p, i, a, form, label, input, textarea, button} from '@cycle/dom';
+import {footer, div, h4, p, i, a} from '@cycle/dom'
 import styles from './footer.css'
 
-function main() {
+function main () {
   return footer(`.${styles.root}`, [
     div(`.${styles.aPropos}`, [
       h4('Qui sommes-nous ?'),
@@ -9,7 +9,7 @@ function main() {
         i('.fa.fa-twitter'),
         'Le projet principalement maintenu par ',
         a(
-          {attrs: {href: "http://twitter.com/pierremartin"}},
+          {attrs: {href: 'http://twitter.com/pierremartin'}},
           'Pierre Martin'
         )
       ]),
@@ -17,12 +17,12 @@ function main() {
         i('.fa.fa-github'),
         'Le code source est disponible sur ',
         a(
-          {attrs: {href: "http://github.com/real34/ma-cave"}},
+          {attrs: {href: 'http://github.com/real34/ma-cave'}},
           'Github'
         )
       ])
     ])
-  ]);
+  ])
 }
 
-export default main;
+export default main

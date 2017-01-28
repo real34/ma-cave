@@ -1,20 +1,20 @@
-import xs from 'xstream';
+import xs from 'xstream'
 import {form, input} from '@cycle/dom'
 
 function main (sources, name) {
-  const { importFile$ } = intent(sources, name);
+  const { importFile$ } = intent(sources, name)
 
   return {
     DOM: xs.of(view(name)),
     events: {importFile$}
-  };
+  }
 }
 
 function view (name) {
   return form(`.${name}`, [
     input({attrs: {type: 'file'}}),
     'Importer un fichier CSV OpenCellar'
-  ]);
+  ])
 }
 
 function intent (responses, name) {
@@ -22,15 +22,15 @@ function intent (responses, name) {
     .map((e) => e.target.files[0])
     .map((file) => xs.create({
       start: (observer) => {
-        let reader = new window.FileReader();
-        reader.onload = e => observer.next(e.target.result);
-        reader.readAsText(file, 'ISO-8859-1');
+        let reader = new window.FileReader()
+        reader.onload = e => observer.next(e.target.result)
+        reader.readAsText(file, 'ISO-8859-1')
       },
       stop: () => {}
     }))
-    .flatten();
+    .flatten()
 
-  return { importFile$ };
+  return { importFile$ }
 }
 
-export default main;
+export default main

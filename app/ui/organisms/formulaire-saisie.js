@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 import {
   Bouteille,
@@ -11,22 +11,22 @@ import {
   Producteur,
   Region,
   Taux
-} from '../metier/inventaire/bouteille';
+} from '../metier/inventaire/bouteille'
 
 class FormulaireSaisie extends React.Component {
   ajouteBouteille (e) {
-    var fields = e.target.elements;
-    var bouteille = new Bouteille(fields.nom.value);
-    bouteille.setMillesime(new Millesime(fields.millesime.value));
-    bouteille.setCouleur(new Couleur(fields.couleur.value));
+    var fields = e.target.elements
+    var bouteille = new Bouteille(fields.nom.value)
+    bouteille.setMillesime(new Millesime(fields.millesime.value))
+    bouteille.setCouleur(new Couleur(fields.couleur.value))
     bouteille.setContenance(new Contenance(
       fields.contenance_quantite.value,
       fields.contenance_unite.value
-    ));
-    bouteille.setProducteur(new Producteur(fields.producteur.value));
-    bouteille.setDenomination(new Denomination(fields.denomination.value));
-    bouteille.setRegion(new Region(fields.region.value));
-    bouteille.setTauxAlcool(new Taux(fields.taux_alcool.value));
+    ))
+    bouteille.setProducteur(new Producteur(fields.producteur.value))
+    bouteille.setDenomination(new Denomination(fields.denomination.value))
+    bouteille.setRegion(new Region(fields.region.value))
+    bouteille.setTauxAlcool(new Taux(fields.taux_alcool.value))
 
     // TODO Make it work in a different component
     // for (var cepage in fields.cepages.value) {
@@ -37,15 +37,15 @@ class FormulaireSaisie extends React.Component {
       fields.medaille_classement.value,
       fields.medaille_nom.value,
       fields.medaille_annee.value
-    ));
+    ))
 
     // this.props.cave.ajouteBouteille(bouteille);
-    e.preventDefault();
+    e.preventDefault()
   }
 
   render () {
     return (
-      <form onSubmit={ this.ajouteBouteille.bind(this) }>
+      <form onSubmit={this.ajouteBouteille.bind(this)}>
         <div>
           <label htmlFor='nom'>Nom / Cuvée</label>
           <input type='text' name='nom' placeholder='Entrez le nom / la cuvée de la bouteille' />
@@ -135,9 +135,9 @@ class FormulaireSaisie extends React.Component {
 
         <button type='submit'>Mettre en cave</button>
       </form>
-    );
+    )
   }
 
 }
 
-export default FormulaireSaisie;
+export default FormulaireSaisie

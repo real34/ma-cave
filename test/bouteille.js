@@ -1,43 +1,41 @@
-var moduleBouteille = require('../app/bouteille');
-var Bouteille = moduleBouteille.Bouteille;
-var Millesime = moduleBouteille.Millesime;
-var Couleur = moduleBouteille.Couleur;
+var moduleBouteille = require('../app/bouteille')
+var Bouteille = moduleBouteille.Bouteille
+var Millesime = moduleBouteille.Millesime
+var Couleur = moduleBouteille.Couleur
 
 describe('Bouteille', function () {
-    describe('création', function () {
-        it('doit avoir un nom', function(){
-            var bouteille = new Bouteille('Chateau DevOpenSud');
-            bouteille.should.have.property('nom');
-            bouteille.nom.should.equal('Chateau DevOpenSud');
-        });
-    });
+  describe('création', function () {
+    it('doit avoir un nom', function () {
+      var bouteille = new Bouteille('Chateau DevOpenSud')
+      bouteille.should.have.property('nom')
+      bouteille.nom.should.equal('Chateau DevOpenSud')
+    })
+  })
 
-    describe('enrichissement des informations', function(){
-    	var bouteille;
+  describe('enrichissement des informations', function () {
+    	var bouteille
 
-    	beforeEach(function(){
-    		bouteille = new Bouteille('Fougue');
+    	beforeEach(function () {
+    		bouteille = new Bouteille('Fougue')
     	})
 
-    	it('peut définir le millésime', function(){
-    		var millesime = new Millesime(2011);
-    		bouteille.setMillesime(millesime);
-    		bouteille.millesime.should.equal(millesime);
-    	});
+    	it('peut définir le millésime', function () {
+    		var millesime = new Millesime(2011)
+    		bouteille.setMillesime(millesime)
+    		bouteille.millesime.should.equal(millesime)
+    	})
 
-    	it('peut définir la  couleur', function(){
-    		var couleur = new Couleur('rouge');
-    		bouteille.setCouleur(couleur);
-    		bouteille.couleur.should.equal(couleur);
-    	});
+    	it('peut définir la  couleur', function () {
+    		var couleur = new Couleur('rouge')
+    		bouteille.setCouleur(couleur)
+    		bouteille.couleur.should.equal(couleur)
+    	})
 
-    	xit('peut définir ... le reste !', function() {
+    	xit('peut définir ... le reste !', function () {
     		// TODO !
-    	});
-    })
-
-});
-
+    	})
+  })
+})
 
 /**
 

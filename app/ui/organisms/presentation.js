@@ -1,4 +1,4 @@
-import {section, h2, p} from '@cycle/dom';
+import {section, h2, p} from '@cycle/dom'
 
 function main () {
   return section('.presentation', [
@@ -7,7 +7,7 @@ function main () {
       Cette application vous permet de gérer, visualiser et organiser
       le contenu de votre cave à vin.
     `)
-  ]);
+  ])
 }
 
-export default main;
+export default main

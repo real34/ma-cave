@@ -11,13 +11,16 @@
   "js_build_args": "app/main.js -t babelify -o public/js/app.js",
   "js_test_cmd": "mocha --no-colors --compilers js:babel/register --recursive",
   "scripts": {
-    "lint": "standard --fix app/*.js app/**/*.js",
+    "lint": "standard --fix",
     "test": "$npm_package_js_test_cmd --reporter list",
     "posttest": "npm run lint",
     "tdd": "$npm_package_js_test_cmd --reporter min --watch",
     "build": "webpack",
     "start": "webpack-dev-server --progress --colors --watch --display-error-details --inline --host 0.0.0.0 --port 80",
     "deploy": "gh-pages-deploy"
+  },
+  "standard": {
+    "ignore": ["/public"]
   },
   "gh-pages-deploy": {
     "staticpath": "public",

@@ -1,11 +1,10 @@
-import xs from 'xstream';
-import {section, span, a, i, div} from '@cycle/dom';
-import {BarreActions} from '../molecules';
-import {MessageErreur, ListeBouteilles} from '../organisms';
+import {section, a, i, div} from '@cycle/dom'
+import {BarreActions} from '../molecules'
+import {MessageErreur, ListeBouteilles} from '../organisms'
 
 function main (sources) {
   const state$ = sources.Inventaire
-    .map((data) => data.cave.contenu);
+    .map((data) => data.cave.contenu)
 
   return {
     DOM: view(state$)
@@ -17,12 +16,12 @@ function view (state$) {
     .map((cave) => section(
       '.cave',
       [cave.estVide() ? renderErreurCaveVide() : renderContent(cave)]
-    ));
+    ))
 }
 
 function renderErreurCaveVide () {
   return MessageErreur(
-    "Vous n'avez pas encore ajouté de bouteilles à votre cave.",
+    `Vous n'avez pas encore ajouté de bouteilles à votre cave.`,
     [
       a('.action', {attrs: {href: '/cave/mettre-des-bouteilles'}}, [
         i('.fa.fa-plus'),
@@ -35,18 +34,18 @@ function renderErreurCaveVide () {
       ]),
       ' afin de pouvoir commencer à utiliser le site'
     ]
-  );
+  )
 }
 
-function renderContent(cave) {
+function renderContent (cave) {
   const actions = [
     { href: '/cave/mettre-des-bouteilles', title: 'Mettre une bouteille en cave' },
     { href: '/cave/importer-depuis-opencellar', title: 'Importer depuis OpenCellar' }
-  ];
+  ]
   return div([
     BarreActions(actions),
-    ListeBouteilles("Vos bouteilles", cave.bouteilles())
-  ]);
+    ListeBouteilles('Vos bouteilles', cave.bouteilles())
+  ])
 }
 
-export default main;
+export default main
