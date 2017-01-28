@@ -5,7 +5,7 @@ import ListeBouteilles from './liste-bouteilles.js';
 import MessageErreur from './message-erreur.js';
 import Presentation from './presentation.js';
 
-export default {
+export {
 	Footer,
 	FormulaireImport,
 	Header,

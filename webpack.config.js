@@ -10,10 +10,24 @@ module.exports = {
         filename: "app.js"
     },
     module: {
-        loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-            { test: /\.css$/, loader: "style-loader!css-loader?modules&importLoaders=1&localIdentName=[name]__[local]___[hash:base64:5]" },
-            { test: /\.png$/, loader: "url-loader?limit=20000" }
+        rules: [
+            { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
+            {
+              test: /\.css$/,
+              use: [
+                {
+                  loader: "style-loader"
+                },
+                {
+                  loader: "css-loader",
+                  options: {
+                    modules: true,
+                    importLoaders: 1
+                  }
+                }
+              ]
+            },
+            { test: /\.png$/, use: "url-loader?limit=20000" }
         ],
         noParse: [
             // See https://github.com/pouchdb/pouchdb/issues/3647#issuecomment-83112389

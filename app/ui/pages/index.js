@@ -1,7 +1,5 @@
 import Cave from './cave.js';
 import ImportCave from './import-cave.js';
 
-export default {
-	Cave,
-	ImportCave
-}
+export {Cave}
+export {ImportCave}

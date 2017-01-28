@@ -1,7 +1,7 @@
 import BarreActions from './barre-actions.js';
 import Bouteille from './bouteille.js';
 
-export default {
+export {
 	BarreActions,
 	Bouteille,
 }

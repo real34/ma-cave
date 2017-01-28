@@ -11,11 +11,11 @@ function main (sources) {
     '/cave/importer-depuis-opencellar': ImportCave
   });
 
-  const page$ = match$.map(({path, value}) => value(
-    Object.assign({}, sources, {
+  const page$ = match$.map(({path, value}) => {
+    return value(Object.assign({}, sources, {
       Router: sources.Router.path(path)
-    }
-  )));
+    }))
+  });
 
   const view$ = page$
     .map((page) => page.DOM)
