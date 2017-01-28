@@ -1108,7 +1108,7 @@ defined@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/defined/-/defined-1.0.0.tgz#c98d9bcef75674188e110969151199e39b1fa693"
 
-deglob@^2.1.0:
+deglob@^2.0.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/deglob/-/deglob-2.1.0.tgz#4d44abe16ef32c779b4972bd141a80325029a14a"
   dependencies:
@@ -1341,10 +1341,6 @@ escope@^3.6.0:
     esrecurse "^4.1.0"
     estraverse "^4.1.1"
 
-eslint-config-semistandard@7.0.0:
-  version "7.0.0"
-  resolved "https://registry.yarnpkg.com/eslint-config-semistandard/-/eslint-config-semistandard-7.0.0.tgz#f803493f56a5172f7f59c35ae648360b41f2ff71"
-
 eslint-config-standard-jsx@3.2.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/eslint-config-standard-jsx/-/eslint-config-standard-jsx-3.2.0.tgz#c240e26ed919a11a42aa4de8059472b38268d620"
@@ -1357,20 +1353,20 @@ eslint-plugin-promise@~3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/eslint-plugin-promise/-/eslint-plugin-promise-3.4.0.tgz#6ba9048c2df57be77d036e0c68918bc9b4fc4195"
 
-eslint-plugin-react@~6.8.0:
-  version "6.8.0"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.8.0.tgz#741ab5438a094532e5ce1bbb935d6832356f492d"
+eslint-plugin-react@~6.7.1:
+  version "6.7.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-react/-/eslint-plugin-react-6.7.1.tgz#1af96aea545856825157d97c1b50d5a8fb64a5a7"
   dependencies:
     doctrine "^1.2.2"
-    jsx-ast-utils "^1.3.4"
+    jsx-ast-utils "^1.3.3"
 
 eslint-plugin-standard@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/eslint-plugin-standard/-/eslint-plugin-standard-2.0.1.tgz#3589699ff9c917f2c25f76a916687f641c369ff3"
 
-eslint@~3.11.1:
-  version "3.11.1"
-  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.11.1.tgz#408be581041385cba947cd8d1cd2227782b55dbf"
+eslint@~3.10.2:
+  version "3.10.2"
+  resolved "https://registry.yarnpkg.com/eslint/-/eslint-3.10.2.tgz#c9a10e8bf6e9d65651204778c503341f1eac3ce7"
   dependencies:
     babel-code-frame "^6.16.0"
     chalk "^1.1.3"
@@ -2368,7 +2364,7 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.3.6"
 
-jsx-ast-utils@^1.3.4:
+jsx-ast-utils@^1.3.3:
   version "1.3.5"
   resolved "https://registry.yarnpkg.com/jsx-ast-utils/-/jsx-ast-utils-1.3.5.tgz#9ba6297198d9f754594d62e59496ffb923778dd4"
   dependencies:
@@ -3662,7 +3658,7 @@ readable-stream@1.0.33, "readable-stream@>=1.0.33-1 <1.1.0-0", readable-stream@^
     isarray "0.0.1"
     string_decoder "~0.10.x"
 
-readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.5, readable-stream@~2.0.0, readable-stream@~2.0.5:
+readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.2, readable-stream@^2.0.5, readable-stream@~2.0.0, readable-stream@~2.0.5:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.0.6.tgz#8f90341e68a53ccc928788dacfcd11b36eb9b78e"
   dependencies:
@@ -3673,7 +3669,7 @@ readable-stream@^2.0.0, readable-stream@^2.0.1, readable-stream@^2.0.5, readable
     string_decoder "~0.10.x"
     util-deprecate "~1.0.1"
 
-"readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.0.2, readable-stream@^2.1.0, readable-stream@^2.1.5, readable-stream@^2.2.2:
+"readable-stream@^2.0.0 || ^1.1.13", readable-stream@^2.1.0, readable-stream@^2.1.5, readable-stream@^2.2.2:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/readable-stream/-/readable-stream-2.2.2.tgz#a9e6fec3c7dda85f8bb1b3ba7028604556fc825e"
   dependencies:
@@ -3908,19 +3904,6 @@ sax@~1.2.1:
 scope-eval@0.0.3:
   version "0.0.3"
   resolved "https://registry.yarnpkg.com/scope-eval/-/scope-eval-0.0.3.tgz#166f2ccd1f3754429dec511805501f9d6923b5ec"
-
-semistandard@^9.2.1:
-  version "9.2.1"
-  resolved "https://registry.yarnpkg.com/semistandard/-/semistandard-9.2.1.tgz#65d0e99deb63225250b8a993cec8174b54593a9d"
-  dependencies:
-    eslint "~3.11.1"
-    eslint-config-semistandard "7.0.0"
-    eslint-config-standard "6.2.1"
-    eslint-config-standard-jsx "3.2.0"
-    eslint-plugin-promise "~3.4.0"
-    eslint-plugin-react "~6.8.0"
-    eslint-plugin-standard "~2.0.1"
-    standard-engine "~5.3.0"
 
 "semver@2 || 3 || 4 || 5", semver@~5.3.0:
   version "5.3.0"
@@ -4168,16 +4151,28 @@ stack-trace@0.0.x:
   version "0.0.9"
   resolved "https://registry.yarnpkg.com/stack-trace/-/stack-trace-0.0.9.tgz#a8f6eaeca90674c333e7c43953f275b451510695"
 
-standard-engine@~5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/standard-engine/-/standard-engine-5.3.0.tgz#fa254d7e068d92de8019d9945d420286d1ce04c9"
+standard-engine@~5.2.0:
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/standard-engine/-/standard-engine-5.2.0.tgz#400660ae5acce8afd4db60ff2214a9190ad790a3"
   dependencies:
-    deglob "^2.1.0"
+    deglob "^2.0.0"
     find-root "^1.0.0"
     get-stdin "^5.0.1"
     home-or-tmp "^2.0.0"
     minimist "^1.1.0"
     pkg-config "^1.0.1"
+
+standard@^8.6.0:
+  version "8.6.0"
+  resolved "https://registry.yarnpkg.com/standard/-/standard-8.6.0.tgz#635132be7bfb567c2921005f30f9e350e4752aad"
+  dependencies:
+    eslint "~3.10.2"
+    eslint-config-standard "6.2.1"
+    eslint-config-standard-jsx "3.2.0"
+    eslint-plugin-promise "~3.4.0"
+    eslint-plugin-react "~6.7.1"
+    eslint-plugin-standard "~2.0.1"
+    standard-engine "~5.2.0"
 
 "statuses@>= 1.3.1 < 2", statuses@~1.3.0, statuses@~1.3.1:
   version "1.3.1"
