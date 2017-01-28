@@ -1,0 +1,13 @@
+app:
+  image: kkarczmarczyk/node-yarn:latest
+  volumes:
+    - .:/project
+    - ~/.yarn:/home/node/.cache/yarn
+  working_dir: /project
+  expose:
+    - "8080"
+  environment:
+    VIRTUAL_HOST: ma-cave.test
+    VIRTUAL_PORT: 8080
+  entrypoint: yarn
+  command: start

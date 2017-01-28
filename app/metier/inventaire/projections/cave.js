@@ -1,4 +1,4 @@
-import Bacon from 'baconjs';
+import xs from 'xstream';
 import { Bouteille, Couleur } from '../bouteille';
 
 class Cave {
@@ -8,32 +8,29 @@ class Cave {
 	estVide() {
 		return this._bouteilles.length === 0;
 	}
-	ajouteBouteille(bouteille) {
-		this._bouteilles.push(bouteille);
+	ajouteBouteille(infos, dateAjout = Date.now()) {
+		this._bouteilles.push({infos, dateAjout});
 	}
 	bouteilles() {
 		return this._bouteilles;
 	}
 }
 
-function init(eventBus) {
-	const ligneImportee = eventBus.flatMap(
-		(e) => e.type === 'LigneOpenCellarImportee' ? e.ligne : Bacon.never()
-	);
+export default (event$) => {
+	const importMod$ = event$
+		.filter(e => e.type === 'LigneOpenCellarImportee')
+		.map(event => function(cave) {
+			const ligne = event.payload.ligne;
+			let bouteille = new Bouteille(ligne.Nom);
 
-	return Bacon.update(
-		new Cave(),
-		[ligneImportee], nouvelleBouteilleOpenCellar
-	);
-}
+			bouteille.setCouleur(new Couleur(ligne.Couleur));
+			cave.ajouteBouteille(bouteille, event.createdAt);
+			return cave;
+		});
 
-function nouvelleBouteilleOpenCellar(cave, ligne) {
-	let bouteille = new Bouteille(ligne.Nom);
-	bouteille.setCouleur(new Couleur(ligne.Couleur));
-	cave.ajouteBouteille(bouteille);
-	return cave;
-}
+	const state$ = xs.merge(xs.of((x) => x), importMod$)
+		.fold((acc, mod) => mod(acc), new Cave())
+		.map(cave => ({name: 'cave', contenu: cave}));
 
-export default {
-	projectFrom: init
-}
+	return state$
+};

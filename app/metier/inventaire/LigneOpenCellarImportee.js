@@ -1,16 +1,4 @@
-import Bacon from 'baconjs';
-
-function init(commandBus) {
-	return commandBus
-		.flatMap(extractSupportedCommands)
-		.map(asEvent);
-}
-
-function extractSupportedCommands(command) {
-	return (command.type === 'ImporterLigneOpenCellar')
-		? command.data
-		: Bacon.never();
-}
+import xs from 'xstream';
 
 function asEvent(ligne) {
 	return {
@@ -19,6 +7,6 @@ function asEvent(ligne) {
 	};
 }
 
-export default {
-	attachTo: init
-}
+export default (command$) => command$
+	.filter(command => command.type === 'ImporterLigneOpenCellar')
+	.map((command) => asEvent(command.data));

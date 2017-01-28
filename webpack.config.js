@@ -1,8 +1,6 @@
 var path = require('path');
 var node_modules = path.resolve(__dirname, 'node_modules');
-var pathToReact = path.resolve(node_modules, 'react/dist/react.js');
 
-console.log(pathToReact);
 module.exports = {
     entry: {
         app: ['./app/main.js']
@@ -11,18 +9,27 @@ module.exports = {
         path: "./public",
         filename: "app.js"
     },
-    resolve: {
-        alias: {
-            "react": pathToReact
-        }
-    },
     module: {
-        loaders: [
-            { test: /\.js$/, exclude: /node_modules/, loader: "babel-loader" },
-            { test: /\.jsx$/, exclude: /node_modules/, loader: 'jsx!babel-loader' },
+        rules: [
+            { test: /\.js$/, exclude: /node_modules/, use: "babel-loader" },
+            {
+              test: /\.css$/,
+              use: [
+                {
+                  loader: "style-loader"
+                },
+                {
+                  loader: "css-loader",
+                  options: {
+                    modules: true,
+                    importLoaders: 1
+                  }
+                }
+              ]
+            },
+            { test: /\.png$/, use: "url-loader?limit=20000" }
         ],
         noParse: [
-            pathToReact,
             // See https://github.com/pouchdb/pouchdb/issues/3647#issuecomment-83112389
             /lie\.js$|\/leveldown\/|\/levelup\//
         ]
