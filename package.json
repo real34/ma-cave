@@ -8,19 +8,17 @@
     "width": 800,
     "height": 600
   },
-  "js_build_args": "app/main.js -t babelify -o public/js/app.js",
-  "js_test_cmd": "mocha --no-colors --compilers js:babel/register --recursive",
   "scripts": {
     "lint": "standard --fix",
-    "test": "$npm_package_js_test_cmd --reporter list",
-    "posttest": "npm run lint",
-    "tdd": "$npm_package_js_test_cmd --reporter min --watch",
+    "test": "jest",
+    "tdd": "jest --watch",
     "build": "webpack",
     "start": "webpack-dev-server --progress --colors --watch --display-error-details --inline --host 0.0.0.0 --port 80",
     "deploy": "gh-pages-deploy"
   },
   "standard": {
-    "ignore": ["/public"]
+    "ignore": ["/public"],
+    "globals": ["describe", "it", "expect"]
   },
   "gh-pages-deploy": {
     "staticpath": "public",
@@ -42,11 +40,11 @@
   "devDependencies": {
     "babel-core": "^6.22.1",
     "babel-loader": "^6.2.10",
-    "chai": "^3.5.0",
+    "babel-preset-env": "^1.1.8",
     "css-loader": "^0.26.1",
     "file-loader": "^0.9.0",
     "gh-pages-deploy": "^0.4.2",
-    "mocha": "^3.2.0",
+    "jest": "^18.1.0",
     "node-neat": "^1.1.0",
     "standard": "^8.6.0",
     "style-loader": "^0.13.1",
